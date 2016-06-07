@@ -1,4 +1,6 @@
-// ConsoleApplication26.cpp: определяет точку входа для консольного приложения.
+// ConsoleApplication25.cpp: определяет точку входа для консольного приложения.
+//
+
 #include <stdafx.h>
 #include <conio.h>
 #include <stdio.h>
@@ -7,7 +9,7 @@
 #include <windows.h>
 
 HANDLE hConsole;
-HANDLE hStdout, hStdin;
+//HANDLE hStdout, hStdin;
 HANDLE hStdOut = GetStdHandle(STD_OUTPUT_HANDLE);
 
 void GotoXY(int X, int Y)
@@ -16,7 +18,7 @@ void GotoXY(int X, int Y)
 	SetConsoleCursorPosition(hStdOut, coord);
 }
 
-enum ConsoleColor
+enum ConsoleColor            //Iiaee??aiea oaaoia
 {
 	Black = 0,
 	Blue = 1,
@@ -40,7 +42,7 @@ void SetColor(int text, int background)
 	HANDLE hStdOut = GetStdHandle(STD_OUTPUT_HANDLE);
 	SetConsoleTextAttribute(hStdOut, (WORD)((background << 4) | text));
 }
-char s1[256];
+char s1[256];                         //Iiaee??aiea ?onneie eiae?iaee
 char *Rus(char *s2)
 {
 	AnsiToOem(s2, s1); return s1;
@@ -51,26 +53,30 @@ char *Rus(char *s2)
 int sheeps(int pole[10][10])
 {
 	int i, j, f, k, r;
-	int rand_chislo, rand_chislo1, ts, s;
+	int rand_chislo, rand_chislo1, ts, s; //neo?aeiua ?enea
 
-	/*  char kr=219;
-	char a=218,b=196,c=191,
-	d=179,
-	e=192, g=217;   */
-	srand(time(NULL));
+										  /*  char kr=219;
+										  char a=218,b=196,c=191,     //ia?aiaiiua aey ia?aoe eeaoie
+										  d=179,
+										  e=192, g=217;   */
+	srand(time(NULL));      //ooieoey aey aaia?aoee neo?aeiuo ?enae
 
 	for (i = 0; i<10; i++)
 		for (j = 0; j<10; j++)
 			pole[i][j] = 0;
-	
 
-		f = 0;
-		rand_chislo = 3 + rand() % 3;
-		rand_chislo1 = 3 + rand() % 3;
+	do {
+		f = 0;                                 //?annoaiiaea ?aoaa?iiai ei?aaey
+		rand_chislo = 0 + rand() % 10;
+		rand_chislo1 = 0 + rand() % 10;
 
 		ts = 1 + rand() % 4;
 
-		
+		if (ts == 1) { for (i = 0; i<3; i++) if (rand_chislo == i)f = 1; }
+		if (ts == 2) { for (i = 7; i<10; i++) if (rand_chislo == i)f = 1; }
+		if (ts == 3) { for (i = 0; i<3; i++) if (rand_chislo1 == i)f = 1; }
+		if (ts == 4) { for (i = 7; i<10; i++) if (rand_chislo1 == i)f = 1; }
+	} while (f == 1);
 	switch (ts) {
 	case 1: pole[rand_chislo][rand_chislo1] = 1; pole[rand_chislo - 1][rand_chislo1] = 1;
 		pole[rand_chislo - 2][rand_chislo1] = 1; pole[rand_chislo - 3][rand_chislo1] = 1; break;
@@ -87,89 +93,72 @@ int sheeps(int pole[10][10])
 
 
 
-	for (k = 0; k<3; k++)
+	for (k = 0; k<3; k++)                                       //?annoaiiaea aaieiuo ei?aaeae
 	{
 		do {
 			f = 0;
-			rand_chislo = 2 + rand() % 4;
-			rand_chislo1 = 2 + rand() % 4;
+			rand_chislo = 0 + rand() % 10;
+			rand_chislo1 = 0 + rand() % 10;
 
 			ts = 1 + rand() % 4;
 
-			if (ts == 1)
-			{
-				if (rand_chislo != 0) 
-				{
+			if (ts == 1) {
+				if (rand_chislo != 0) {
 					for (i = rand_chislo - 2; i<rand_chislo + 2; i++)
-						for (j = rand_chislo1 - 1; j <= rand_chislo1 + 1; j++)	
-							if (pole[i][j] != 0)
-					    	      f = 1;					    
+						for (j = rand_chislo1 - 1; j <= rand_chislo1 + 1; j++)
+						{
+							if (pole[i][j] != 0) { f = 1; }
+						}
 				}
 				else f = 1;
 			}
-			if (ts == 2) 
-			{
-				if (rand_chislo != 9)
-				{
+			if (ts == 2) {
+				if (rand_chislo != 9) {
 					for (i = rand_chislo - 1; i <= rand_chislo + 2; i++)
-						for (j = rand_chislo1 - 1; j <= rand_chislo1 + 1; j++)						
-							if (pole[i][j] != 0) 
-								f = 1; 						
+						for (j = rand_chislo1 - 1; j <= rand_chislo1 + 1; j++)
+						{
+							if (pole[i][j] != 0) { f = 1; }
+						}
 				}
 				else f = 1;
 			}
-			if (ts == 3) 
-			{
-				if (rand_chislo1 != 0) 
-				{
+			if (ts == 3) {
+				if (rand_chislo1 != 0) {
 					for (i = rand_chislo - 1; i <= rand_chislo + 1; i++)
-						for (j = rand_chislo1 - 2; j <= rand_chislo1 + 1; j++)						
-							if (pole[i][j] != 0) 
-								f = 1; 						
+						for (j = rand_chislo1 - 2; j <= rand_chislo1 + 1; j++)
+						{
+							if (pole[i][j] != 0) { f = 1; }
+						}
 				}
 				else f = 1;
 			}
-			if (ts == 4) 
-			{
-				if (rand_chislo1 != 9)
-				{
+			if (ts == 4) {
+				if (rand_chislo1 != 9) {
 					for (i = rand_chislo - 1; i <= rand_chislo + 1; i++)
-						for (j = rand_chislo1 - 1; j <= rand_chislo1 + 2; j++)						
-							if (pole[i][j] != 0) 
-								f = 1; 						
+						for (j = rand_chislo1 - 1; j <= rand_chislo1 + 2; j++)
+						{
+							if (pole[i][j] != 0) { f = 1; }
+						}
 				}
 				else f = 1;
 			}
 		} while (f == 1);
-		switch (ts) 
-		{
-		case 1: 
-			pole[rand_chislo][rand_chislo1] = 1;
-			pole[rand_chislo - 1][rand_chislo1] = 1;
-			break;
-		case 2: 
-			pole[rand_chislo][rand_chislo1] = 1;
-			pole[rand_chislo + 1][rand_chislo1] = 1;
-			break;
-		case 3: 
-			pole[rand_chislo][rand_chislo1] = 1;
-			pole[rand_chislo][rand_chislo1 - 1] = 1;
-			break;
-		case 4: 
-			pole[rand_chislo][rand_chislo1] = 1;
-			pole[rand_chislo][rand_chislo1 + 1] = 1;
-			break;
+		switch (ts) {
+		case 1: pole[rand_chislo][rand_chislo1] = 1; pole[rand_chislo - 1][rand_chislo1] = 1; break;
+		case 2: pole[rand_chislo][rand_chislo1] = 1; pole[rand_chislo + 1][rand_chislo1] = 1; break;
+		case 3: pole[rand_chislo][rand_chislo1] = 1; pole[rand_chislo][rand_chislo1 - 1] = 1; break;
+		case 4: pole[rand_chislo][rand_chislo1] = 1; pole[rand_chislo][rand_chislo1 + 1] = 1; break;
 		}
 
 
 	}
 
-	for (k = 0; k<2; k++)                                    
+	for (k = 0; k<2; k++)                                       //?annoaiiaea o?ieiuo ei?aaeae
 	{
 		do {
 			f = 0;
-			rand_chislo = 1 + rand() % 5;
-			rand_chislo1 = 1 + rand() % 5;
+			rand_chislo = 0 + rand() % 10;
+			rand_chislo1 = 0 + rand() % 10;
 
 			ts = 1 + rand() % 4;
 
@@ -224,7 +213,7 @@ int sheeps(int pole[10][10])
 
 
 
-	for (i = 0; i<4; i++)
+	for (i = 0; i<4; i++)                          //?annoaiiaea iae?iuo ei?aaeae
 	{
 		do {
 			rand_chislo = 0 + rand() % 10;
@@ -233,100 +222,28 @@ int sheeps(int pole[10][10])
 
 		pole[rand_chislo][rand_chislo1] = 1;
 	}
-
-
-
-
-
-
-
-
-
-
-	/*   for (i=0;i<10;i++)                    
-	{for (r=0;r<3;r++){for (j=0;j<10;j++)
-	{if (pole[i][j]==0){ if(r==0) printf ("%c%c%c%c%c",a,b,b,b,c);
-	if(r==1) printf ("%c   %c",d,d);
-	if(r==2) printf ("%c%c%c%c%c",e,b,b,b,g);}
-
-	else printf ("%c%c%c%c%c",kr,kr,kr,kr,kr);}
-	printf ("\n");}}
-
-
-
-	getch(); */
 	return pole[10][10];
 }
 
-int vivod(int pole[10][10])
+/*int vivod(int pole[10][10])
 {
-	int i, j, x, y;
-	// 1 player
-	printf("\xc9\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xBB\n");
-	printf("\xba"); printf("\t\t     "); printf("\xba\n");
-	printf("\xba"); printf("\t\t     "); printf("\xba\n");
-	printf("\xba"); printf("\t\t     "); printf("\xba\n");
-	printf("\xba"); printf("\t\t     "); printf("\xba\n");
-	printf("\xba"); printf("\t\t     "); printf("\xba\n");
-	printf("\xba"); printf("\t\t     "); printf("\xba\n");
-	printf("\xba"); printf("\t\t     "); printf("\xba\n");
-	printf("\xba"); printf("\t\t     "); printf("\xba\n");
-	printf("\xba"); printf("\t\t     "); printf("\xba\n");
-	printf("\xba"); printf("\t\t     "); printf("\xba\n");
-	printf("\xba"); printf("\t\t     "); printf("\xba\n");
-	printf("\xba"); printf("\t\t     "); printf("\xba\n");
-	printf("\xba"); printf("\t\t     "); printf("\xba\n");
-	printf("\xba"); printf("\t\t     "); printf("\xba\n");
-	printf("\xba"); printf("\t\t     "); printf("\xba\n");
-	printf("\xba"); printf("\t\t     "); printf("\xba\n");
-	printf("\xba"); printf("\t\t     "); printf("\xba\n");
-	printf("\xba"); printf("\t\t     "); printf("\xba\n");
-	printf("\xba"); printf("\t\t     "); printf("\xba\n");
-	printf("\xba"); printf("\t\t     "); printf("\xba\n");
-	printf("\xc8\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xBC\n");
-
-	// 2 player
-	GotoXY(40, 0); printf("\xc9\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xBB\n");
-	GotoXY(40, 1); printf("\xba"); printf("\t\t     "); printf("\xba\n");
-	GotoXY(40, 2); printf("\xba"); printf("\t\t     "); printf("\xba\n");
-	GotoXY(40, 3); printf("\xba"); printf("\t\t     "); printf("\xba\n");
-	GotoXY(40, 4); printf("\xba"); printf("\t\t     "); printf("\xba\n");
-	GotoXY(40, 5); printf("\xba"); printf("\t\t     "); printf("\xba\n");
-	GotoXY(40, 6); printf("\xba"); printf("\t\t     "); printf("\xba\n");
-	GotoXY(40, 7); printf("\xba"); printf("\t\t     "); printf("\xba\n");
-	GotoXY(40, 8); printf("\xba"); printf("\t\t     "); printf("\xba\n");
-	GotoXY(40, 9); printf("\xba"); printf("\t\t     "); printf("\xba\n");
-	GotoXY(40, 10); printf("\xba"); printf("\t\t     "); printf("\xba\n");
-	GotoXY(40, 11); printf("\xba"); printf("\t\t     "); printf("\xba\n");
-	GotoXY(40, 12); printf("\xba"); printf("\t\t     "); printf("\xba\n");
-	GotoXY(40, 13); printf("\xba"); printf("\t\t     "); printf("\xba\n");
-	GotoXY(40, 14); printf("\xba"); printf("\t\t     "); printf("\xba\n");
-	GotoXY(40, 15); printf("\xba"); printf("\t\t     "); printf("\xba\n");
-	GotoXY(40, 16); printf("\xba"); printf("\t\t     "); printf("\xba\n");
-	GotoXY(40, 17); printf("\xba"); printf("\t\t     "); printf("\xba\n");
-	GotoXY(40, 18); printf("\xba"); printf("\t\t     "); printf("\xba\n");
-	GotoXY(40, 19); printf("\xba"); printf("\t\t     "); printf("\xba\n");
-	GotoXY(40, 20); printf("\xba"); printf("\t\t     "); printf("\xba\n");
-	GotoXY(40, 21); printf("\xc8\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xBC\n");
-
-	for (i = 0, x = 1; i<10, x<21; i++, x = x + 2)
-		for (j = 0, y = 1; j<10, y<21; j++, y = y + 2)
-
-		{
-			GotoXY(x, y); if (pole[i][j] == 0) { if ((j + i) % 2 != 0) { SetColor(0, 1); printf("  "); } else { SetColor(0, 9); printf("  "); } }
-			else { SetColor(0, 14); printf("  "); }
-			GotoXY(x, y + 1); if (pole[i][j] == 0) { if ((j + i) % 2 != 0) { SetColor(0, 1); printf("  "); } else { SetColor(0, 9); printf("  "); } }
-			else { SetColor(0, 14); printf("  "); }
-		}
+int i,j,x,y;
 
 
-	return 0;
+for (i=0,x=1;i<10,x<21;i++,x=x+2)
+for (j=0,y=1;j<10,y<21;j++,y=y+2)
+
+{
+GotoXY(x,y);if (pole[i][j]==0) {if((j+i)%2!=0) {SetColor(0,1);printf ("  ");} else{SetColor(0,9);printf ("  ");}}else  { SetColor(0,14);printf ("  ");}
+GotoXY(x,y+1);if (pole[i][j]==0) { if((j+i)%2!=0) {SetColor(0,1);printf ("  ");} else{SetColor(0,9);printf ("  ");}}else {  SetColor(0,14);printf ("  ");}
 }
 
-int ras(int mypole[10][10])
-{
 
-	int i, j, x, y, u, f, e, w, nap, ui;
+return 0;
+}
+*/
+void write()
+{
 	SetColor(15, 0);
 	printf("\xc9\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xBB\n");
 	printf("\xba"); printf("\t\t     "); printf("\xba\n");
@@ -374,15 +291,88 @@ int ras(int mypole[10][10])
 	GotoXY(40, 19); printf("\xba"); printf("\t\t     "); printf("\xba\n");
 	GotoXY(40, 20); printf("\xba"); printf("\t\t     "); printf("\xba\n");
 	GotoXY(40, 21); printf("\xc8\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xBC\n");
+}
+
+int bonus(int pole[10][10])
+{
+	int k, rand_chislo, rand_chislo1;
+	k = 0;
+	do {
+		rand_chislo = 0 + rand() % 10;
+		rand_chislo1 = 0 + rand() % 10;
+		if (pole[rand_chislo][rand_chislo1] == 0)
+		{
+			pole[rand_chislo][rand_chislo1] = 9;
+			k++;
+		}
+	} while (k != 3);
+	return pole[10][10];
+}
+
+void ras_pole1(int mypole[10][10], int i, int j, int x, int y)
+{
+	GotoXY(x, y);
+	if (mypole[i][j] == 1)
+	{
+		SetColor(0, 12);
+		printf("  ");
+	}
+	else
+	{
+		if ((i + j) % 2 != 0)
+		{
+			SetColor(0, 1);
+			printf("  ");
+		}
+		else
+		{
+			SetColor(0, 9);
+			printf("  ");
+		}
+	}
+	GotoXY(x, y + 1);
+	if (mypole[i][j] == 1)
+	{
+		SetColor(0, 12);
+		printf("  ");
+	}
+	else
+	{
+		if ((i + j) % 2 != 0)
+		{
+			SetColor(0, 1);
+			printf("  ");
+		}
+		else
+		{
+			SetColor(0, 9);
+			printf("  ");
+		}
+	}
+}
+void ras_pole2(int mypole[10][10], int i, int j, int x, int y)
+{
+	GotoXY(x, y);  if ((j + i) % 2 != 0) { SetColor(0, 1); printf("  "); }
+	else { SetColor(0, 9); printf("  "); }
+	GotoXY(x, y + 1); if ((j + i) % 2 != 0) { SetColor(0, 1); printf("  "); }
+	else { SetColor(0, 9); printf("  "); }
+}
+void ras_pole3(int mypole[10][10], int x, int y)
+{
+	GotoXY(x, y); SetColor(0, 14); printf("  ");
+	GotoXY(x, y + 1); SetColor(0, 14); printf("  ");
+}
+int ras(int mypole[10][10])
+{
+	system("cls");
+	int i, j, x, y, u, f, e, w, nap, ui;
+	write();
 
 	for (i = 0, x = 1; i<10, x<21; i++, x = x + 2)
 		for (j = 0, y = 1; j<10, y<21; j++, y = y + 2)
 
 		{
-			GotoXY(x, y);  if ((j + i) % 2 != 0) { SetColor(0, 1); printf("  "); }
-			else { SetColor(0, 9); printf("  "); }
-			GotoXY(x, y + 1); if ((j + i) % 2 != 0) { SetColor(0, 1); printf("  "); }
-			else { SetColor(0, 9); printf("  "); }
+			ras_pole2(mypole, i, j, x, y);
 		}
 
 	for (i = 0; i<10; i++)
@@ -398,15 +388,10 @@ int ras(int mypole[10][10])
 	for (u = 1; u<5; u++)
 	{
 		if (ui == 0)
-			for (i = 0, x = 41; i<10, x<61; i++, x = x + 2)
-				for (j = 0, y = 1; j<10, y<21; j++, y = y + 2)
+			for (i = 0, x = 41; i < 10, x < 61; i++, x = x + 2)
+				for (j = 0, y = 1; j < 10, y < 21; j++, y = y + 2)
+					ras_pole2(mypole, i, j, x, y);
 
-				{
-					GotoXY(x, y); if (mypole[i][j] == 1) { SetColor(0, 12); printf("  "); }
-					else { if ((j + i) % 2 != 0) { SetColor(0, 1); printf("  "); } else { SetColor(0, 9); printf("  "); } }
-					GotoXY(x, y + 1); if (mypole[i][j] == 1) { SetColor(0, 12); printf("  "); }
-					else { if ((j + i) % 2 != 0) { SetColor(0, 1); printf("  "); } else { SetColor(0, 9); printf("  "); } }
-				}
 		switch (u)
 		{
 		case 1:
@@ -415,8 +400,7 @@ int ras(int mypole[10][10])
 		for (e = x; e<x + 8; e = e + 2)
 		{
 
-			GotoXY(e, y); SetColor(0, 14); printf("  ");
-			GotoXY(e, y + 1); SetColor(0, 14); printf("  ");
+			ras_pole3(mypole, e, y);
 		}
 		do {
 			f = 0;
@@ -436,16 +420,12 @@ int ras(int mypole[10][10])
 							{
 								i = (e - 40) / 2;
 								j = y / 2;
-								GotoXY(e, y); if ((i + j) % 2 != 0) { SetColor(0, 2); printf("  "); }
-								else { SetColor(0, 10); printf("  "); }
-								GotoXY(e, y + 1); if ((i + j) % 2 != 0) { SetColor(0, 1); printf("  "); }
-								else { SetColor(0, 9); printf("  "); }
+								ras_pole2(mypole, i, j, e, y);
 							}
 							y = y - 2;
 							for (e = x; e<x + 8; e = e + 2)
 							{
-								GotoXY(e, y); SetColor(0, 14); printf("  ");
-								GotoXY(e, y + 1); SetColor(0, 14); printf("  ");
+								ras_pole3(mypole, e, y);
 							}
 						}
 						else
@@ -455,16 +435,12 @@ int ras(int mypole[10][10])
 								{
 									i = (x - 40) / 2;
 									j = e / 2;
-									GotoXY(x, e); if ((i + j) % 2 != 0) { SetColor(0, 1); printf("  "); }
-									else { SetColor(0, 9); printf("  "); }
-									GotoXY(x, e + 1); if ((i + j) % 2 != 0) { SetColor(0, 1); printf("  "); }
-									else { SetColor(0, 9); printf("  "); }
+									ras_pole2(mypole, i, j, x, e);
 								}
 								y = y - 2;
 								for (e = y; e<y + 8; e = e + 2)
 								{
-									GotoXY(x, e); SetColor(0, 14); printf("  ");
-									GotoXY(x, e + 1); SetColor(0, 14); printf("  ");
+									ras_pole3(mypole, x, e);
 								}
 							}
 						}
@@ -482,16 +458,12 @@ int ras(int mypole[10][10])
 							for (e = x; e<x + 8; e = e + 2) {
 								i = (e - 40) / 2;
 								j = y / 2;
-								GotoXY(e, y); if ((i + j) % 2 != 0) { SetColor(0, 1); printf("  "); }
-								else { SetColor(0, 9); printf("  "); }
-								GotoXY(e, y + 1); if ((i + j) % 2 != 0) { SetColor(0, 1); printf("  "); }
-								else { SetColor(0, 9); printf("  "); }
+								ras_pole2(mypole, i, j, e, y);
 							}
 							x = x + 2;
 							for (e = x; e<x + 8; e = e + 2)
 							{
-								GotoXY(e, y); SetColor(0, 14); printf("  ");
-								GotoXY(e, y + 1); SetColor(0, 14); printf("  ");
+								ras_pole3(mypole, e, y);
 
 							}
 						}
@@ -502,16 +474,12 @@ int ras(int mypole[10][10])
 							{
 								i = (x - 40) / 2;
 								j = e / 2;
-								GotoXY(x, e); if ((i + j) % 2 != 0) { SetColor(0, 1); printf("  "); }
-								else { SetColor(0, 9); printf("  "); }
-								GotoXY(x, e + 1); if ((i + j) % 2 != 0) { SetColor(0, 1); printf("  "); }
-								else { SetColor(0, 9); printf("  "); }
+								ras_pole2(mypole, i, j, x, e);
 							}
 							x = x + 2;
 							for (e = y; e<y + 8; e = e + 2)
 							{
-								GotoXY(x, e); SetColor(0, 14); printf("  ");
-								GotoXY(x, e + 1); SetColor(0, 14); printf("  ");
+								ras_pole3(mypole, x, e);
 							}
 						}
 					}
@@ -526,16 +494,12 @@ int ras(int mypole[10][10])
 							for (e = x; e<x + 8; e = e + 2) {
 								i = (e - 40) / 2;
 								j = y / 2;
-								GotoXY(e, y); if ((i + j) % 2 != 0) { SetColor(0, 1); printf("  "); }
-								else { SetColor(0, 9); printf("  "); }
-								GotoXY(e, y + 1); if ((i + j) % 2 != 0) { SetColor(0, 1); printf("  "); }
-								else { SetColor(0, 9); printf("  "); }
+								ras_pole2(mypole, i, j, e, y);
 							}
 							y = y + 2;
 							for (e = x; e<x + 8; e = e + 2)
 							{
-								GotoXY(e, y); SetColor(0, 14); printf("  ");
-								GotoXY(e, y + 1); SetColor(0, 14); printf("  ");
+								ras_pole3(mypole, e, y);
 							}
 						}
 					}
@@ -545,16 +509,12 @@ int ras(int mypole[10][10])
 							{
 								i = (x - 40) / 2;
 								j = e / 2;
-								GotoXY(x, e); if ((i + j) % 2 != 0) { SetColor(0, 1); printf("  "); }
-								else { SetColor(0, 9); printf("  "); }
-								GotoXY(x, e + 1); if ((i + j) % 2 != 0) { SetColor(0, 1); printf("  "); }
-								else { SetColor(0, 9); printf("  "); }
+								ras_pole2(mypole, i, j, x, e);
 							}
 							y = y + 2;
 							for (e = y; e<y + 8; e = e + 2)
 							{
-								GotoXY(x, e); SetColor(0, 14); printf("  ");
-								GotoXY(x, e + 1); SetColor(0, 14); printf("  ");
+								ras_pole3(mypole, x, e);
 							}
 						}
 					}
@@ -568,16 +528,12 @@ int ras(int mypole[10][10])
 						for (e = x; e<x + 8; e = e + 2) {
 							i = (e - 40) / 2;
 							j = y / 2;
-							GotoXY(e, y); if ((i + j) % 2 != 0) { SetColor(0, 1); printf("  "); }
-							else { SetColor(0, 9); printf("  "); }
-							GotoXY(e, y + 1); if ((i + j) % 2 != 0) { SetColor(0, 1); printf("  "); }
-							else { SetColor(0, 9); printf("  "); }
+							ras_pole2(mypole, i, j, e, y);
 						}
 						x = x - 2;
 						for (e = x; e<x + 8; e = e + 2)
 						{
-							GotoXY(e, y); SetColor(0, 14); printf("  ");
-							GotoXY(e, y + 1); SetColor(0, 14); printf("  ");
+							ras_pole3(mypole, e, y);
 
 						}
 					}
@@ -588,16 +544,13 @@ int ras(int mypole[10][10])
 						{
 							i = (x - 40) / 2;
 							j = e / 2;
-							GotoXY(x, e); if ((i + j) % 2 != 0) { SetColor(0, 1); printf("  "); }
-							else { SetColor(0, 9); printf("  "); }
-							GotoXY(x, e + 1); if ((i + j) % 2 != 0) { SetColor(0, 1); printf("  "); }
-							else { SetColor(0, 9); printf("  "); }
+							ras_pole1(mypole, i, j, x, e);
+
 						}
 						x = x - 2;
 						for (e = y; e<y + 8; e = e + 2)
 						{
-							GotoXY(x, e); SetColor(0, 14); printf("  ");
-							GotoXY(x, e + 1); SetColor(0, 14); printf("  ");
+							ras_pole3(mypole, x, e);
 						}
 					}
 				}
@@ -619,18 +572,14 @@ int ras(int mypole[10][10])
 							{
 								i = (x - 40) / 2;
 								j = e / 2;
-								GotoXY(x, e); if (mypole[i][j] == 1) { SetColor(0, 12); printf("  "); }
-								else { if ((i + j) % 2 != 0) { SetColor(0, 1); printf("  "); } else { SetColor(0, 9); printf("  "); } }
-								GotoXY(x, e + 1); if (mypole[i][j] == 1) { SetColor(0, 12); printf("  "); }
-								else { if ((i + j) % 2 != 0) { SetColor(0, 1); printf("  "); } else { SetColor(0, 9); printf("  "); } }
+								ras_pole1(mypole, i, j, x, e);
 							}
 
 
 
 							for (e = x; e<x + 8; e = e + 2)
 							{
-								GotoXY(e, y); SetColor(0, 14); printf("  ");
-								GotoXY(e, y + 1); SetColor(0, 14); printf("  ");
+								ras_pole3(mypole, e, y);
 
 							}
 
@@ -639,16 +588,13 @@ int ras(int mypole[10][10])
 							for (e = x; e<x + 8; e = e + 2) {
 								i = (e - 40) / 2;
 								j = y / 2;
-								GotoXY(e, y); if (mypole[i][j] == 1) { SetColor(0, 12); printf("  "); }
-								else { if ((i + j) % 2 != 0) { SetColor(0, 1); printf("  "); } else { SetColor(0, 9); printf("  "); } }
-								GotoXY(e, y + 1); if (mypole[i][j] == 1) { SetColor(0, 12); printf("  "); }
-								else { if ((i + j) % 2 != 0) { SetColor(0, 1); printf("  "); } else { SetColor(0, 9); printf("  "); } }
+								ras_pole1(mypole, i, j, e, y);
 							}
 
 							for (e = y; e<y + 8; e = e + 2)
 							{
-								GotoXY(x, e); SetColor(0, 14); printf("  ");
-								GotoXY(x, e + 1); SetColor(0, 14); printf("  ");
+								ras_pole3(mypole, x, e);
+
 							}
 						}
 					}
@@ -697,18 +643,13 @@ int ras(int mypole[10][10])
 					for (j = 0, y = 1; j<10, y<21; j++, y = y + 2)
 
 					{
-						GotoXY(x, y); if (mypole[i][j] == 1) { SetColor(0, 12); printf("  "); }
-						else { if ((j + i) % 2 != 0) { SetColor(0, 1); printf("  "); } else { SetColor(0, 9); printf("  "); } }
-						GotoXY(x, y + 1); if (mypole[i][j] == 1) { SetColor(0, 12); printf("  "); }
-						else { if ((j + i) % 2 != 0) { SetColor(0, 1); printf("  "); } else { SetColor(0, 9); printf("  "); } }
+						ras_pole1(mypole, i, j, x, y);
 					}
 				x = 41; y = nap = 1;
 				i = j = 0;
 				for (e = x; e<x + 6; e = e + 2)
 				{
-
-					GotoXY(e, y); SetColor(0, 14); printf("  ");
-					GotoXY(e, y + 1); SetColor(0, 14); printf("  ");
+					ras_pole3(mypole, e, y);
 				}
 				do {
 					f = 0;
@@ -729,16 +670,12 @@ int ras(int mypole[10][10])
 									{
 										i = (e - 40) / 2;
 										j = y / 2;
-										GotoXY(e, y); if (mypole[i][j] == 1) { SetColor(0, 12); printf("  "); }
-										else { if ((i + j) % 2 != 0) { SetColor(0, 1); printf("  "); } else { SetColor(0, 9); printf("  "); } }
-										GotoXY(e, y + 1); if (mypole[i][j] == 1) { SetColor(0, 12); printf("  "); }
-										else { if ((i + j) % 2 != 0) { SetColor(0, 1); printf("  "); } else { SetColor(0, 9); printf("  "); } }
+										ras_pole1(mypole, i, j, e, y);
 									}
 									y = y - 2;
 									for (e = x; e<x + 6; e = e + 2)
 									{
-										GotoXY(e, y); SetColor(0, 14); printf("  ");
-										GotoXY(e, y + 1); SetColor(0, 14); printf("  ");
+										ras_pole3(mypole, e, y);
 									}
 								}
 								else
@@ -748,16 +685,12 @@ int ras(int mypole[10][10])
 										{
 											i = (x - 40) / 2;
 											j = e / 2;
-											GotoXY(x, e); if (mypole[i][j] == 1) { SetColor(0, 12); printf("  "); }
-											else { if ((i + j) % 2 != 0) { SetColor(0, 1); printf("  "); } else { SetColor(0, 9); printf("  "); } }
-											GotoXY(x, e + 1); if (mypole[i][j] == 1) { SetColor(0, 12); printf("  "); }
-											else { if ((i + j) % 2 != 0) { SetColor(0, 1); printf("  "); } else { SetColor(0, 9); printf("  "); } }
+											ras_pole1(mypole, i, j, x, e);
 										}
 										y = y - 2;
 										for (e = y; e<y + 6; e = e + 2)
 										{
-											GotoXY(x, e); SetColor(0, 14); printf("  ");
-											GotoXY(x, e + 1); SetColor(0, 14); printf("  ");
+											ras_pole3(mypole, x, e);
 										}
 									}
 								}
@@ -776,16 +709,12 @@ int ras(int mypole[10][10])
 									for (e = x; e<x + 6; e = e + 2) {
 										i = (e - 40) / 2;
 										j = y / 2;
-										GotoXY(e, y); if (mypole[i][j] == 1) { SetColor(0, 12); printf("  "); }
-										else { if ((i + j) % 2 != 0) { SetColor(0, 1); printf("  "); } else { SetColor(0, 9); printf("  "); } }
-										GotoXY(e, y + 1); if (mypole[i][j] == 1) { SetColor(0, 12); printf("  "); }
-										else { if ((i + j) % 2 != 0) { SetColor(0, 1); printf("  "); } else { SetColor(0, 9); printf("  "); } }
+										ras_pole1(mypole, i, j, e, y);
 									}
 									x = x + 2;
 									for (e = x; e<x + 6; e = e + 2)
 									{
-										GotoXY(e, y); SetColor(0, 14); printf("  ");
-										GotoXY(e, y + 1); SetColor(0, 14); printf("  ");
+										ras_pole3(mypole, e, y);
 
 									}
 								}
@@ -796,16 +725,12 @@ int ras(int mypole[10][10])
 									{
 										i = (x - 40) / 2;
 										j = e / 2;
-										GotoXY(x, e); if (mypole[i][j] == 1) { SetColor(0, 12); printf("  "); }
-										else { if ((i + j) % 2 != 0) { SetColor(0, 1); printf("  "); } else { SetColor(0, 9); printf("  "); } }
-										GotoXY(x, e + 1); if (mypole[i][j] == 1) { SetColor(0, 12); printf("  "); }
-										else { if ((i + j) % 2 != 0) { SetColor(0, 1); printf("  "); } else { SetColor(0, 9); printf("  "); } }
+										ras_pole1(mypole, i, j, x, e);
 									}
 									x = x + 2;
 									for (e = y; e<y + 6; e = e + 2)
 									{
-										GotoXY(x, e); SetColor(0, 14); printf("  ");
-										GotoXY(x, e + 1); SetColor(0, 14); printf("  ");
+										ras_pole3(mypole, x, e);
 									}
 								}
 							}
@@ -820,16 +745,12 @@ int ras(int mypole[10][10])
 									for (e = x; e<x + 6; e = e + 2) {
 										i = (e - 40) / 2;
 										j = y / 2;
-										GotoXY(e, y); if (mypole[i][j] == 1) { SetColor(0, 12); printf("  "); }
-										else { if ((i + j) % 2 != 0) { SetColor(0, 1); printf("  "); } else { SetColor(0, 9); printf("  "); } }
-										GotoXY(e, y + 1); if (mypole[i][j] == 1) { SetColor(0, 12); printf("  "); }
-										else { if ((i + j) % 2 != 0) { SetColor(0, 1); printf("  "); } else { SetColor(0, 9); printf("  "); } }
+										ras_pole1(mypole, i, j, e, y);
 									}
 									y = y + 2;
 									for (e = x; e<x + 6; e = e + 2)
 									{
-										GotoXY(e, y); SetColor(0, 14); printf("  ");
-										GotoXY(e, y + 1); SetColor(0, 14); printf("  ");
+										ras_pole3(mypole, e, y);
 									}
 								}
 							}
@@ -839,16 +760,12 @@ int ras(int mypole[10][10])
 									{
 										i = (x - 40) / 2;
 										j = e / 2;
-										GotoXY(x, e); if (mypole[i][j] == 1) { SetColor(0, 12); printf("  "); }
-										else { if ((i + j) % 2 != 0) { SetColor(0, 1); printf("  "); } else { SetColor(0, 9); printf("  "); } }
-										GotoXY(x, e + 1); if (mypole[i][j] == 1) { SetColor(0, 12); printf("  "); }
-										else { if ((i + j) % 2 != 0) { SetColor(0, 1); printf("  "); } else { SetColor(0, 9); printf("  "); } }
+										ras_pole1(mypole, i, j, x, e);
 									}
 									y = y + 2;
 									for (e = y; e<y + 6; e = e + 2)
 									{
-										GotoXY(x, e); SetColor(0, 14); printf("  ");
-										GotoXY(x, e + 1); SetColor(0, 14); printf("  ");
+										ras_pole3(mypole, x, e);
 									}
 								}
 							}
@@ -862,16 +779,12 @@ int ras(int mypole[10][10])
 								for (e = x; e<x + 6; e = e + 2) {
 									i = (e - 40) / 2;
 									j = y / 2;
-									GotoXY(e, y); if (mypole[i][j] == 1) { SetColor(0, 12); printf("  "); }
-									else { if ((i + j) % 2 != 0) { SetColor(0, 1); printf("  "); } else { SetColor(0, 9); printf("  "); } }
-									GotoXY(e, y + 1); if (mypole[i][j] == 1) { SetColor(0, 12); printf("  "); }
-									else { if ((i + j) % 2 != 0) { SetColor(0, 1); printf("  "); } else { SetColor(0, 9); printf("  "); } }
+									ras_pole1(mypole, i, j, e, y);
 								}
 								x = x - 2;
 								for (e = x; e<x + 6; e = e + 2)
 								{
-									GotoXY(e, y); SetColor(0, 14); printf("  ");
-									GotoXY(e, y + 1); SetColor(0, 14); printf("  ");
+									ras_pole3(mypole, e, y);
 
 								}
 							}
@@ -882,16 +795,12 @@ int ras(int mypole[10][10])
 								{
 									i = (x - 40) / 2;
 									j = e / 2;
-									GotoXY(x, e); if (mypole[i][j] == 1) { SetColor(0, 12); printf("  "); }
-									else { if ((i + j) % 2 != 0) { SetColor(0, 1); printf("  "); } else { SetColor(0, 9); printf("  "); } }
-									GotoXY(x, e + 1); if (mypole[i][j] == 1) { SetColor(0, 12); printf("  "); }
-									else { if ((i + j) % 2 != 0) { SetColor(0, 1); printf("  "); } else { SetColor(0, 9); printf("  "); } }
+									ras_pole1(mypole, i, j, x, e);
 								}
 								x = x - 2;
 								for (e = y; e<y + 6; e = e + 2)
 								{
-									GotoXY(x, e); SetColor(0, 14); printf("  ");
-									GotoXY(x, e + 1); SetColor(0, 14); printf("  ");
+									ras_pole3(mypole, x, e);
 								}
 							}
 						}
@@ -913,18 +822,14 @@ int ras(int mypole[10][10])
 									{
 										i = (x - 40) / 2;
 										j = e / 2;
-										GotoXY(x, e); if (mypole[i][j] == 1) { SetColor(0, 12); printf("  "); }
-										else { if ((i + j) % 2 != 0) { SetColor(0, 1); printf("  "); } else { SetColor(0, 9); printf("  "); } }
-										GotoXY(x, e + 1); if (mypole[i][j] == 1) { SetColor(0, 12); printf("  "); }
-										else { if ((i + j) % 2 != 0) { SetColor(0, 1); printf("  "); } else { SetColor(0, 9); printf("  "); } }
+										ras_pole1(mypole, i, j, x, e);
 									}
 
 
 
 									for (e = x; e<x + 6; e = e + 2)
 									{
-										GotoXY(e, y); SetColor(0, 14); printf("  ");
-										GotoXY(e, y + 1); SetColor(0, 14); printf("  ");
+										ras_pole3(mypole, e, y);
 
 									}
 
@@ -933,16 +838,13 @@ int ras(int mypole[10][10])
 									for (e = x; e<x + 6; e = e + 2) {
 										i = (e - 40) / 2;
 										j = y / 2;
-										GotoXY(e, y); if (mypole[i][j] == 1) { SetColor(0, 12); printf("  "); }
-										else { if ((i + j) % 2 != 0) { SetColor(0, 1); printf("  "); } else { SetColor(0, 9); printf("  "); } }
-										GotoXY(e, y + 1); if (mypole[i][j] == 1) { SetColor(0, 12); printf("  "); }
-										else { if ((i + j) % 2 != 0) { SetColor(0, 1); printf("  "); } else { SetColor(0, 9); printf("  "); } }
+										ras_pole1(mypole, i, j, e, y);
 									}
 
 									for (e = y; e<y + 6; e = e + 2)
 									{
-										GotoXY(x, e); SetColor(0, 14); printf("  ");
-										GotoXY(x, e + 1); SetColor(0, 14); printf("  ");
+										ras_pole3(mypole, x, e);
+
 									}
 								}
 							}
@@ -1011,18 +913,13 @@ int ras(int mypole[10][10])
 					for (j = 0, y = 1; j<10, y<21; j++, y = y + 2)
 
 					{
-						GotoXY(x, y); if (mypole[i][j] == 1) { SetColor(0, 12); printf("  "); }
-						else { if ((j + i) % 2 != 0) { SetColor(0, 1); printf("  "); } else { SetColor(0, 9); printf("  "); } }
-						GotoXY(x, y + 1); if (mypole[i][j] == 1) { SetColor(0, 12); printf("  "); }
-						else { if ((j + i) % 2 != 0) { SetColor(0, 1); printf("  "); } else { SetColor(0, 9); printf("  "); } }
+						ras_pole1(mypole, i, j, x, y);
 					}
 				x = 41; y = nap = 1;
 				i = j = 0;
 				for (e = x; e<x + 4; e = e + 2)
 				{
-
-					GotoXY(e, y); SetColor(0, 14); printf("  ");
-					GotoXY(e, y + 1); SetColor(0, 14); printf("  ");
+					ras_pole3(mypole, e, y);
 				}
 				do {
 					f = 0;
@@ -1042,16 +939,12 @@ int ras(int mypole[10][10])
 									{
 										i = (e - 40) / 2;
 										j = y / 2;
-										GotoXY(e, y); if (mypole[i][j] == 1) { SetColor(0, 12); printf("  "); }
-										else { if ((i + j) % 2 != 0) { SetColor(0, 1); printf("  "); } else { SetColor(0, 9); printf("  "); } }
-										GotoXY(e, y + 1); if (mypole[i][j] == 1) { SetColor(0, 12); printf("  "); }
-										else { if ((i + j) % 2 != 0) { SetColor(0, 1); printf("  "); } else { SetColor(0, 9); printf("  "); } }
+										ras_pole1(mypole, i, j, e, y);
 									}
 									y = y - 2;
 									for (e = x; e<x + 4; e = e + 2)
 									{
-										GotoXY(e, y); SetColor(0, 14); printf("  ");
-										GotoXY(e, y + 1); SetColor(0, 14); printf("  ");
+										ras_pole3(mypole, e, y);
 									}
 								}
 								else
@@ -1061,16 +954,12 @@ int ras(int mypole[10][10])
 										{
 											i = (x - 40) / 2;
 											j = e / 2;
-											GotoXY(x, e); if (mypole[i][j] == 1) { SetColor(0, 12); printf("  "); }
-											else { if ((i + j) % 2 != 0) { SetColor(0, 1); printf("  "); } else { SetColor(0, 9); printf("  "); } }
-											GotoXY(x, e + 1); if (mypole[i][j] == 1) { SetColor(0, 12); printf("  "); }
-											else { if ((i + j) % 2 != 0) { SetColor(0, 1); printf("  "); } else { SetColor(0, 9); printf("  "); } }
+											ras_pole1(mypole, i, j, x, e);
 										}
 										y = y - 2;
 										for (e = y; e<y + 4; e = e + 2)
 										{
-											GotoXY(x, e); SetColor(0, 14); printf("  ");
-											GotoXY(x, e + 1); SetColor(0, 14); printf("  ");
+											ras_pole3(mypole, x, e);
 										}
 									}
 								}
@@ -1089,16 +978,12 @@ int ras(int mypole[10][10])
 									for (e = x; e<x + 4; e = e + 2) {
 										i = (e - 40) / 2;
 										j = y / 2;
-										GotoXY(e, y); if (mypole[i][j] == 1) { SetColor(0, 12); printf("  "); }
-										else { if ((i + j) % 2 != 0) { SetColor(0, 1); printf("  "); } else { SetColor(0, 9); printf("  "); } }
-										GotoXY(e, y + 1); if (mypole[i][j] == 1) { SetColor(0, 12); printf("  "); }
-										else { if ((i + j) % 2 != 0) { SetColor(0, 1); printf("  "); } else { SetColor(0, 9); printf("  "); } }
+										ras_pole1(mypole, i, j, e, y);
 									}
 									x = x + 2;
 									for (e = x; e<x + 4; e = e + 2)
 									{
-										GotoXY(e, y); SetColor(0, 14); printf("  ");
-										GotoXY(e, y + 1); SetColor(0, 14); printf("  ");
+										ras_pole3(mypole, e, y);
 
 									}
 								}
@@ -1109,16 +994,12 @@ int ras(int mypole[10][10])
 									{
 										i = (x - 40) / 2;
 										j = e / 2;
-										GotoXY(x, e); if (mypole[i][j] == 1) { SetColor(0, 12); printf("  "); }
-										else { if ((i + j) % 2 != 0) { SetColor(0, 1); printf("  "); } else { SetColor(0, 9); printf("  "); } }
-										GotoXY(x, e + 1); if (mypole[i][j] == 1) { SetColor(0, 12); printf("  "); }
-										else { if ((i + j) % 2 != 0) { SetColor(0, 1); printf("  "); } else { SetColor(0, 9); printf("  "); } }
+										ras_pole1(mypole, i, j, x, e);
 									}
 									x = x + 2;
 									for (e = y; e<y + 4; e = e + 2)
 									{
-										GotoXY(x, e); SetColor(0, 14); printf("  ");
-										GotoXY(x, e + 1); SetColor(0, 14); printf("  ");
+										ras_pole3(mypole, x, e);
 									}
 								}
 							}
@@ -1133,16 +1014,12 @@ int ras(int mypole[10][10])
 									for (e = x; e<x + 4; e = e + 2) {
 										i = (e - 40) / 2;
 										j = y / 2;
-										GotoXY(e, y); if (mypole[i][j] == 1) { SetColor(0, 12); printf("  "); }
-										else { if ((i + j) % 2 != 0) { SetColor(0, 1); printf("  "); } else { SetColor(0, 9); printf("  "); } }
-										GotoXY(e, y + 1); if (mypole[i][j] == 1) { SetColor(0, 12); printf("  "); }
-										else { if ((i + j) % 2 != 0) { SetColor(0, 1); printf("  "); } else { SetColor(0, 9); printf("  "); } }
+										ras_pole1(mypole, i, j, e, y);
 									}
 									y = y + 2;
 									for (e = x; e<x + 4; e = e + 2)
 									{
-										GotoXY(e, y); SetColor(0, 14); printf("  ");
-										GotoXY(e, y + 1); SetColor(0, 14); printf("  ");
+										ras_pole3(mypole, e, y);
 									}
 								}
 							}
@@ -1152,16 +1029,13 @@ int ras(int mypole[10][10])
 									{
 										i = (x - 40) / 2;
 										j = e / 2;
-										GotoXY(x, e); if (mypole[i][j] == 1) { SetColor(0, 12); printf("  "); }
-										else { if ((i + j) % 2 != 0) { SetColor(0, 1); printf("  "); } else { SetColor(0, 9); printf("  "); } }
-										GotoXY(x, e + 1); if (mypole[i][j] == 1) { SetColor(0, 12); printf("  "); }
-										else { if ((i + j) % 2 != 0) { SetColor(0, 1); printf("  "); } else { SetColor(0, 9); printf("  "); } }
+										ras_pole1(mypole, i, j, x, e);
 									}
 									y = y + 2;
 									for (e = y; e<y + 4; e = e + 2)
 									{
-										GotoXY(x, e); SetColor(0, 14); printf("  ");
-										GotoXY(x, e + 1); SetColor(0, 14); printf("  ");
+										ras_pole3(mypole, x, e);
+
 									}
 								}
 							}
@@ -1175,16 +1049,12 @@ int ras(int mypole[10][10])
 								for (e = x; e<x + 4; e = e + 2) {
 									i = (e - 40) / 2;
 									j = y / 2;
-									GotoXY(e, y); if (mypole[i][j] == 1) { SetColor(0, 12); printf("  "); }
-									else { if ((i + j) % 2 != 0) { SetColor(0, 1); printf("  "); } else { SetColor(0, 9); printf("  "); } }
-									GotoXY(e, y + 1); if (mypole[i][j] == 1) { SetColor(0, 12); printf("  "); }
-									else { if ((i + j) % 2 != 0) { SetColor(0, 1); printf("  "); } else { SetColor(0, 9); printf("  "); } }
+									ras_pole1(mypole, i, j, e, y);
 								}
 								x = x - 2;
 								for (e = x; e<x + 4; e = e + 2)
 								{
-									GotoXY(e, y); SetColor(0, 14); printf("  ");
-									GotoXY(e, y + 1); SetColor(0, 14); printf("  ");
+									ras_pole3(mypole, e, y);
 
 								}
 							}
@@ -1195,16 +1065,12 @@ int ras(int mypole[10][10])
 								{
 									i = (x - 40) / 2;
 									j = e / 2;
-									GotoXY(x, e); if (mypole[i][j] == 1) { SetColor(0, 12); printf("  "); }
-									else { if ((i + j) % 2 != 0) { SetColor(0, 1); printf("  "); } else { SetColor(0, 9); printf("  "); } }
-									GotoXY(x, e + 1); if (mypole[i][j] == 1) { SetColor(0, 12); printf("  "); }
-									else { if ((i + j) % 2 != 0) { SetColor(0, 1); printf("  "); } else { SetColor(0, 9); printf("  "); } }
+									ras_pole1(mypole, i, j, x, e);
 								}
 								x = x - 2;
 								for (e = y; e<y + 4; e = e + 2)
 								{
-									GotoXY(x, e); SetColor(0, 14); printf("  ");
-									GotoXY(x, e + 1); SetColor(0, 14); printf("  ");
+									ras_pole3(mypole, x, e);
 								}
 							}
 						}
@@ -1225,18 +1091,14 @@ int ras(int mypole[10][10])
 									{
 										i = (x - 40) / 2;
 										j = e / 2;
-										GotoXY(x, e); if (mypole[i][j] == 1) { SetColor(0, 12); printf("  "); }
-										else { if ((i + j) % 2 != 0) { SetColor(0, 1); printf("  "); } else { SetColor(0, 9); printf("  "); } }
-										GotoXY(x, e + 1); if (mypole[i][j] == 1) { SetColor(0, 12); printf("  "); }
-										else { if ((i + j) % 2 != 0) { SetColor(0, 1); printf("  "); } else { SetColor(0, 9); printf("  "); } }
+										ras_pole1(mypole, i, j, x, e);
 									}
 
 
 
 									for (e = x; e<x + 4; e = e + 2)
 									{
-										GotoXY(e, y); SetColor(0, 14); printf("  ");
-										GotoXY(e, y + 1); SetColor(0, 14); printf("  ");
+										ras_pole3(mypole, e, y);
 
 									}
 
@@ -1245,16 +1107,12 @@ int ras(int mypole[10][10])
 									for (e = x; e<x + 4; e = e + 2) {
 										i = (e - 40) / 2;
 										j = y / 2;
-										GotoXY(e, y); if (mypole[i][j] == 1) { SetColor(0, 12); printf("  "); }
-										else { if ((i + j) % 2 != 0) { SetColor(0, 1); printf("  "); } else { SetColor(0, 9); printf("  "); } }
-										GotoXY(e, y + 1); if (mypole[i][j] == 1) { SetColor(0, 12); printf("  "); }
-										else { if ((i + j) % 2 != 0) { SetColor(0, 1); printf("  "); } else { SetColor(0, 9); printf("  "); } }
+										ras_pole1(mypole, i, j, e, y);
 									}
 
 									for (e = y; e<y + 4; e = e + 2)
 									{
-										GotoXY(x, e); SetColor(0, 14); printf("  ");
-										GotoXY(x, e + 1); SetColor(0, 14); printf("  ");
+										ras_pole3(mypole, x, e);
 									}
 								}
 							}
@@ -1322,18 +1180,14 @@ int ras(int mypole[10][10])
 					for (j = 0, y = 1; j<10, y<21; j++, y = y + 2)
 
 					{
-						GotoXY(x, y); if (mypole[i][j] == 1) { SetColor(0, 12); printf("  "); }
-						else { if ((j + i) % 2 != 0) { SetColor(0, 1); printf("  "); } else { SetColor(0, 9); printf("  "); } }
-						GotoXY(x, y + 1); if (mypole[i][j] == 1) { SetColor(0, 12); printf("  "); }
-						else { if ((j + i) % 2 != 0) { SetColor(0, 1); printf("  "); } else { SetColor(0, 9); printf("  "); } }
+						ras_pole1(mypole, i, j, x, y);
 					}
 				x = 41; y = 1;
 				i = j = 0;
 				e = x;
 				{
 
-					GotoXY(e, y); SetColor(0, 14); printf("  ");
-					GotoXY(e, y + 1); SetColor(0, 14); printf("  ");
+					ras_pole3(mypole, e, y);
 				}
 				do {
 					f = 0;
@@ -1352,16 +1206,12 @@ int ras(int mypole[10][10])
 								{
 									i = (e - 40) / 2;
 									j = y / 2;
-									GotoXY(e, y); if (mypole[i][j] == 1) { SetColor(0, 12); printf("  "); }
-									else { if ((i + j) % 2 != 0) { SetColor(0, 1); printf("  "); } else { SetColor(0, 9); printf("  "); } }
-									GotoXY(e, y + 1); if (mypole[i][j] == 1) { SetColor(0, 12); printf("  "); }
-									else { if ((i + j) % 2 != 0) { SetColor(0, 1); printf("  "); } else { SetColor(0, 9); printf("  "); } }
+									ras_pole1(mypole, i, j, e, y);
 								}
 								y = y - 2;
 								e = x;
 								{
-									GotoXY(e, y); SetColor(0, 14); printf("  ");
-									GotoXY(e, y + 1); SetColor(0, 14); printf("  ");
+									ras_pole3(mypole, e, y);
 								}
 							}
 
@@ -1379,16 +1229,12 @@ int ras(int mypole[10][10])
 								e = x; {
 									i = (e - 40) / 2;
 									j = y / 2;
-									GotoXY(e, y); if (mypole[i][j] == 1) { SetColor(0, 12); printf("  "); }
-									else { if ((i + j) % 2 != 0) { SetColor(0, 1); printf("  "); } else { SetColor(0, 9); printf("  "); } }
-									GotoXY(e, y + 1); if (mypole[i][j] == 1) { SetColor(0, 12); printf("  "); }
-									else { if ((i + j) % 2 != 0) { SetColor(0, 1); printf("  "); } else { SetColor(0, 9); printf("  "); } }
+									ras_pole1(mypole, i, j, e, y);
 								}
 								x = x + 2;
 								e = x;
 								{
-									GotoXY(e, y); SetColor(0, 14); printf("  ");
-									GotoXY(e, y + 1); SetColor(0, 14); printf("  ");
+									ras_pole3(mypole, e, y);
 
 								}
 							}
@@ -1405,16 +1251,12 @@ int ras(int mypole[10][10])
 								e = x; {
 									i = (e - 40) / 2;
 									j = y / 2;
-									GotoXY(e, y); if (mypole[i][j] == 1) { SetColor(0, 12); printf("  "); }
-									else { if ((i + j) % 2 != 0) { SetColor(0, 1); printf("  "); } else { SetColor(0, 9); printf("  "); } }
-									GotoXY(e, y + 1); if (mypole[i][j] == 1) { SetColor(0, 12); printf("  "); }
-									else { if ((i + j) % 2 != 0) { SetColor(0, 1); printf("  "); } else { SetColor(0, 9); printf("  "); } }
+									ras_pole1(mypole, i, j, e, y);
 								}
 								y = y + 2;
 								e = x;
 								{
-									GotoXY(e, y); SetColor(0, 14); printf("  ");
-									GotoXY(e, y + 1); SetColor(0, 14); printf("  ");
+									ras_pole3(mypole, e, y);
 								}
 							}
 
@@ -1428,16 +1270,12 @@ int ras(int mypole[10][10])
 								e = x; {
 									i = (e - 40) / 2;
 									j = y / 2;
-									GotoXY(e, y); if (mypole[i][j] == 1) { SetColor(0, 12); printf("  "); }
-									else { if ((i + j) % 2 != 0) { SetColor(0, 1); printf("  "); } else { SetColor(0, 9); printf("  "); } }
-									GotoXY(e, y + 1); if (mypole[i][j] == 1) { SetColor(0, 12); printf("  "); }
-									else { if ((i + j) % 2 != 0) { SetColor(0, 1); printf("  "); } else { SetColor(0, 9); printf("  "); } }
+									ras_pole1(mypole, i, j, e, y);
 								}
 								x = x - 2;
 								e = x;
 								{
-									GotoXY(e, y); SetColor(0, 14); printf("  ");
-									GotoXY(e, y + 1); SetColor(0, 14); printf("  ");
+									ras_pole3(mypole, e, y);
 
 								}
 							}
@@ -1497,7 +1335,7 @@ int menu()
 	int f = 1, k;
 	SetColor(0, 0);
 	system("cls");
-	GotoXY(30, 10); SetColor(12, 0); printf(Rus("Главное меню"));
+	GotoXY(30, 10); SetColor(15, 0); printf(Rus("Главное меню"));
 	GotoXY(30, 12); SetColor(15, 0); printf("["); SetColor(0, 2); printf(Rus("Новая игра")); SetColor(15, 0); printf("]");
 	GotoXY(32, 13); SetColor(15, 0); printf("["); printf(Rus("выход")); SetColor(15, 0); printf("]");
 	do {
@@ -1533,8 +1371,7 @@ int menu()
 			}
 		}
 
-		else
-		{
+		else {
 			switch (code)
 			{
 			case 13: k = 1; break;
@@ -1546,17 +1383,59 @@ int menu()
 	return f;
 }
 
-int comp(int mypole[10][10], int udar, int ud[2], int hod[1])  // ИИ
+void comp_yourpole(int mypole[10][10], int x, int y, int i, int j)
+{
+	GotoXY(x, y); switch (mypole[i][j]) {
+	case 0:if ((j + i) % 2 != 0) { SetColor(0, 1); printf("  "); }
+		   else { SetColor(0, 9); printf("  "); }break;
+	case 1:SetColor(0, 12); printf("  "); break;
+	case 2:SetColor(0, 7); printf("  "); break;
+	case 3: SetColor(0, 11); printf("  "); break;
+	case 4:SetColor(0, 7); printf("  "); break;
+	case 5:SetColor(0, 7); printf("  "); break;
+	}
+	GotoXY(x, y + 1); switch (mypole[i][j]) {
+	case 0:if ((j + i) % 2 != 0) { SetColor(0, 1); printf("  "); }
+		   else { SetColor(0, 9); printf("  "); }break;
+	case 1:SetColor(0, 12); printf("  "); break;
+	case 2:SetColor(0, 7); printf("  "); break;
+	case 3:SetColor(0, 11); printf("  "); break;
+	case 4:SetColor(0, 7); printf("  "); break;
+	case 5:SetColor(0, 7); printf("  "); break;
+	}
+}
+
+void comp_mimo(int prj, int per, int f)
+{
+	GotoXY(28, 16); SetColor(15, 0);
+	Sleep(1000);
+	printf(Rus("Мимо!"));
+	prj = 1;
+	per = 1;
+	f = 1;
+}
+
+void comp_popal(int udar, int hod[1], int prj, int per, int f)
+{
+	GotoXY(28, 16); SetColor(15, 0);
+	printf(Rus("Попал!"));
+	udar++;
+	Sleep(1000);
+	printf("\x07");
+	f = 0;
+	prj = 1;
+	per = 1;
+	hod[0] = 1;
+}
+int comp(int mypole[10][10], int udar, int ud[2], int hod[1])
 {
 
 	int i, j, f, per, n, m, x, y, k, str, sto, h, g;
 	int pri, prj;
-
-
 	srand(time(NULL));
 	GotoXY(24, 14);
 	SetColor(9, 0);
-	printf(Rus("  Ходит комп "));
+	printf(Rus("  Ходит враг "));
 	do {
 		f = 1;
 		per = 0;
@@ -1565,9 +1444,8 @@ int comp(int mypole[10][10], int udar, int ud[2], int hod[1])  // ИИ
 		SetColor(15, 0);
 		printf(Rus("      "));
 		Sleep(1000);
-
-		h = 0; if (hod[0] == 5) 
-		{
+		h = 0;
+		if (hod[0] == 5) {
 			for (n = ud[0] - 1; n <= ud[0] + 1 && n<10; n++)
 				for (m = ud[1] - 1; m <= ud[1] + 1 && m<10; m++)
 					if (mypole[n][m] == 1)
@@ -1590,19 +1468,53 @@ int comp(int mypole[10][10], int udar, int ud[2], int hod[1])  // ИИ
 					pri = 1 + rand() % 4; prj = 0;
 					switch (pri) {
 					case 1:
-					{if (mypole[ud[0] - 1][ud[1]] == 0 && ud[0] != 0) { mypole[ud[0] - 1][ud[1]] = 3; GotoXY(28, 16); SetColor(15, 0); Sleep(1000); printf(Rus("Мимо!")); prj = 1; per = 1; f = 1; }
-					if (mypole[ud[0] - 1][ud[1]] == 1 && ud[0] != 0) { mypole[ud[0] - 1][ud[1]] = 4; GotoXY(28, 16); SetColor(15, 0); printf(Rus("Попал!")); udar++; Sleep(1000); printf("\x07"); f = 0; prj = 1; per = 1; hod[0] = 1; }
+					{if (mypole[ud[0] - 1][ud[1]] == 0 && ud[0] != 0) {
+						mypole[ud[0] - 1][ud[1]] = 3;
+						comp_mimo(prj, per, f);
+					}
+					if (mypole[ud[0] - 1][ud[1]] == 1 && ud[0] != 0)
+					{
+						mypole[ud[0] - 1][ud[1]] = 4;
+						comp_popal(udar, hod, prj, per, f);
+					}
 					break; }
 					case 2:
-					{if (mypole[ud[0] + 1][ud[1]] == 0 && ud[0] != 9) { mypole[ud[0] + 1][ud[1]] = 3; GotoXY(28, 16); SetColor(15, 0); Sleep(1000); printf(Rus("Мимо!")); prj = 1; per = 1; f = 1; }
-					if (mypole[ud[0] + 1][ud[1]] == 1 && ud[0] != 9) { mypole[ud[0] + 1][ud[1]] = 4; GotoXY(28, 16); SetColor(15, 0); printf(Rus("Попал!")); udar++; Sleep(1000); printf("\x07"); f = 0; prj = 1; per = 1; hod[0] = 1; }
-					break; }
-					case 3: {if (mypole[ud[0]][ud[1] - 1] == 0 && ud[1] != 0) { mypole[ud[0]][ud[1] - 1] = 3; GotoXY(28, 16); SetColor(15, 0); Sleep(1000); printf(Rus("Мимо!")); prj = 1; per = 1; f = 1; }
-							if (mypole[ud[0]][ud[1] - 1] == 1 && ud[1] != 0) { mypole[ud[0]][ud[1] - 1] = 4; GotoXY(28, 16); SetColor(15, 0); printf(Rus("Попал!")); udar++; Sleep(1000); printf("\x07"); f = 0; prj = 1; per = 1; hod[0] = 1; }
-							break; }
-					case 4: {if (mypole[ud[0]][ud[1] + 1] == 0 && ud[1] != 9) { mypole[ud[0]][ud[1] + 1] = 3; GotoXY(28, 16); SetColor(15, 0); Sleep(1000); printf(Rus("Мимо!")); prj = 1; per = 1; f = 1; }
-							if (mypole[ud[0]][ud[1] + 1] == 1 && ud[1] != 9) { mypole[ud[0]][ud[1] + 1] = 4; GotoXY(28, 16); SetColor(15, 0); printf(Rus("Попал!")); udar++; Sleep(1000); printf("\x07"); f = 0; prj = 1; per = 1; hod[0] = 1; }
-							break; }
+					{
+						if (mypole[ud[0] + 1][ud[1]] == 0 && ud[0] != 9)
+						{
+							mypole[ud[0] + 1][ud[1]] = 3;
+							comp_mimo(prj, per, f);
+						}
+						if (mypole[ud[0] + 1][ud[1]] == 1 && ud[0] != 9)
+						{
+							mypole[ud[0] + 1][ud[1]] = 4;
+							comp_popal(udar, hod, prj, per, f);
+						}
+						break; }
+					case 3: {
+						if (mypole[ud[0]][ud[1] - 1] == 0 && ud[1] != 0)
+						{
+							mypole[ud[0]][ud[1] - 1] = 3;
+							comp_mimo(prj, per, f);
+						}
+						if (mypole[ud[0]][ud[1] - 1] == 1 && ud[1] != 0)
+						{
+							mypole[ud[0]][ud[1] - 1] = 4;
+							comp_popal(udar, hod, prj, per, f);
+						}
+						break; }
+					case 4: {
+						if (mypole[ud[0]][ud[1] + 1] == 0 && ud[1] != 9)
+						{
+							mypole[ud[0]][ud[1] + 1] = 3;
+							comp_mimo(prj, per, f);
+						}
+						if (mypole[ud[0]][ud[1] + 1] == 1 && ud[1] != 9)
+						{
+							mypole[ud[0]][ud[1] + 1] = 4;
+							comp_popal(udar, hod, prj, per, f);
+						}
+						break; }
 					}
 				} while (prj == 0);
 			}
@@ -1624,24 +1536,7 @@ int comp(int mypole[10][10], int udar, int ud[2], int hod[1])  // ИИ
 									for (j = 0, y = 1; j<10, y<21; j++, y = y + 2)
 
 									{
-										GotoXY(x, y); switch (mypole[i][j]) {
-										case 0:if ((j + i) % 2 != 0) { SetColor(0, 1); printf("  "); }
-											   else { SetColor(0, 9); printf("  "); }break;
-										case 1:SetColor(0, 12); printf("  "); break;
-										case 2:SetColor(0, 7); printf("  "); break;
-										case 3: SetColor(0, 11); printf("  "); break;
-										case 4:SetColor(0, 7); printf("  "); break;
-										case 5:SetColor(0, 7); printf("  "); break;
-										}
-										GotoXY(x, y + 1); switch (mypole[i][j]) {
-										case 0:if ((j + i) % 2 != 0) { SetColor(0, 1); printf("  "); }
-											   else { SetColor(0, 9); printf("  "); }break;
-										case 1:SetColor(0, 12); printf("  "); break;
-										case 2:SetColor(0, 7); printf("  "); break;
-										case 3:SetColor(0, 11); printf("  "); break;
-										case 4:SetColor(0, 7); printf("  "); break;
-										case 5:SetColor(0, 7); printf("  "); break;
-										}
+										comp_yourpole(mypole, x, y, i, j);
 									}
 							}
 						}
@@ -1652,24 +1547,7 @@ int comp(int mypole[10][10], int udar, int ud[2], int hod[1])  // ИИ
 									for (j = 0, y = 1; j<10, y<21; j++, y = y + 2)
 
 									{
-										GotoXY(x, y); switch (mypole[i][j]) {
-										case 0:if ((j + i) % 2 != 0) { SetColor(0, 1); printf("  "); }
-											   else { SetColor(0, 9); printf("  "); }break;
-										case 1:SetColor(0, 12); printf("  "); break;
-										case 2:SetColor(0, 7); printf("  "); break;
-										case 3: SetColor(0, 11); printf("  "); break;
-										case 4:SetColor(0, 7); printf("  "); break;
-										case 5:SetColor(0, 7); printf("  "); break;
-										}
-										GotoXY(x, y + 1); switch (mypole[i][j]) {
-										case 0:if ((j + i) % 2 != 0) { SetColor(0, 1); printf("  "); }
-											   else { SetColor(0, 9); printf("  "); }break;
-										case 1:SetColor(0, 12); printf("  "); break;
-										case 2:SetColor(0, 7); printf("  "); break;
-										case 3:SetColor(0, 11); printf("  "); break;
-										case 4:SetColor(0, 7); printf("  "); break;
-										case 5:SetColor(0, 7); printf("  "); break;
-										}
+										comp_yourpole(mypole, x, y, i, j);
 									}
 							}
 						}
@@ -1680,24 +1558,7 @@ int comp(int mypole[10][10], int udar, int ud[2], int hod[1])  // ИИ
 									for (j = 0, y = 1; j<10, y<21; j++, y = y + 2)
 
 									{
-										GotoXY(x, y); switch (mypole[i][j]) {
-										case 0:if ((j + i) % 2 != 0) { SetColor(0, 1); printf("  "); }
-											   else { SetColor(0, 9); printf("  "); }break;
-										case 1:SetColor(0, 12); printf("  "); break;
-										case 2:SetColor(0, 7); printf("  "); break;
-										case 3: SetColor(0, 11); printf("  "); break;
-										case 4:SetColor(0, 7); printf("  "); break;
-										case 5:SetColor(0, 7); printf("  "); break;
-										}
-										GotoXY(x, y + 1); switch (mypole[i][j]) {
-										case 0:if ((j + i) % 2 != 0) { SetColor(0, 1); printf("  "); }
-											   else { SetColor(0, 9); printf("  "); }break;
-										case 1:SetColor(0, 12); printf("  "); break;
-										case 2:SetColor(0, 7); printf("  "); break;
-										case 3:SetColor(0, 11); printf("  "); break;
-										case 4:SetColor(0, 7); printf("  "); break;
-										case 5:SetColor(0, 7); printf("  "); break;
-										}
+										comp_yourpole(mypole, x, y, i, j);
 									}
 							}
 						}
@@ -1708,24 +1569,7 @@ int comp(int mypole[10][10], int udar, int ud[2], int hod[1])  // ИИ
 									for (j = 0, y = 1; j<10, y<21; j++, y = y + 2)
 
 									{
-										GotoXY(x, y); switch (mypole[i][j]) {
-										case 0:if ((j + i) % 2 != 0) { SetColor(0, 1); printf("  "); }
-											   else { SetColor(0, 9); printf("  "); }break;
-										case 1:SetColor(0, 12); printf("  "); break;
-										case 2:SetColor(0, 7); printf("  "); break;
-										case 3: SetColor(0, 11); printf("  "); break;
-										case 4:SetColor(0, 7); printf("  "); break;
-										case 5:SetColor(0, 7); printf("  "); break;
-										}
-										GotoXY(x, y + 1); switch (mypole[i][j]) {
-										case 0:if ((j + i) % 2 != 0) { SetColor(0, 1); printf("  "); }
-											   else { SetColor(0, 9); printf("  "); }break;
-										case 1:SetColor(0, 12); printf("  "); break;
-										case 2:SetColor(0, 7); printf("  "); break;
-										case 3:SetColor(0, 11); printf("  "); break;
-										case 4:SetColor(0, 7); printf("  "); break;
-										case 5:SetColor(0, 7); printf("  "); break;
-										}
+										comp_yourpole(mypole, x, y, i, j);
 									}
 							}
 						}
@@ -1764,24 +1608,7 @@ int comp(int mypole[10][10], int udar, int ud[2], int hod[1])  // ИИ
 			for (j = 0, y = 1; j<10, y<21; j++, y = y + 2)
 
 			{
-				GotoXY(x, y); switch (mypole[i][j]) {
-				case 0:if ((j + i) % 2 != 0) { SetColor(0, 1); printf("  "); }
-					   else { SetColor(0, 9); printf("  "); }break;
-				case 1:SetColor(0, 12); printf("  "); break;
-				case 2:SetColor(0, 7); printf("  "); break;
-				case 3: SetColor(0, 11); printf("  "); break;
-				case 4:SetColor(0, 7); printf("  "); break;
-				case 5:SetColor(0, 7); printf("  "); break;
-				}
-				GotoXY(x, y + 1); switch (mypole[i][j]) {
-				case 0:if ((j + i) % 2 != 0) { SetColor(0, 1); printf("  "); }
-					   else { SetColor(0, 9); printf("  "); }break;
-				case 1:SetColor(0, 12); printf("  "); break;
-				case 2:SetColor(0, 7); printf("  "); break;
-				case 3:SetColor(0, 11); printf("  "); break;
-				case 4:SetColor(0, 7); printf("  "); break;
-				case 5:SetColor(0, 7); printf("  "); break;
-				}
+				comp_yourpole(mypole, x, y, i, j);
 			}
 
 		if (per == 0)
@@ -1801,33 +1628,131 @@ int comp(int mypole[10][10], int udar, int ud[2], int hod[1])  // ИИ
 			for (j = 0, y = 1; j<10, y<21; j++, y = y + 2)
 
 			{
-				GotoXY(x, y); switch (mypole[i][j]) {
-				case 0:if ((j + i) % 2 != 0) { SetColor(0, 1); printf("  "); }
-					   else { SetColor(0, 9); printf("  "); }break;
-				case 1:SetColor(0, 12); printf("  "); break;
-				case 2:SetColor(0, 7); printf("  "); break;
-				case 3: SetColor(0, 11); printf("  "); break;
-				case 4:SetColor(0, 7); printf("  "); break;
-				case 5:SetColor(0, 7); printf("  "); break;
-				}
-				GotoXY(x, y + 1); switch (mypole[i][j]) {
-				case 0:if ((j + i) % 2 != 0) { SetColor(0, 1); printf("  "); }
-					   else { SetColor(0, 9); printf("  "); }break;
-				case 1:SetColor(0, 12); printf("  "); break;
-				case 2:SetColor(0, 7); printf("  "); break;
-				case 3:SetColor(0, 11); printf("  "); break;
-				case 4:SetColor(0, 7); printf("  "); break;
-				case 5:SetColor(0, 7); printf("  "); break;
-				}
+				comp_yourpole(mypole, x, y, i, j);
 			}
 	} while (f == 0);
 
 	return udar;
 }
+int Exit(int code)
+{
+	int k = 0;
+	int f = 1;
+	int vih = 0;
+	GotoXY(24, 14); SetColor(15, 0); printf(Rus("    Выйти?    "));
+	GotoXY(24, 16); SetColor(15, 0); printf("["); SetColor(0, 2); printf(Rus("да")); SetColor(15, 0); printf("]  ");
+	GotoXY(31, 16); SetColor(15, 0); printf("  ["); printf(Rus("нет")); SetColor(15, 0); printf("]");
+	do {
+		k = 0; vih = 0;
+		int code = _getch();
+		if (code == 224)
+		{
+			code = _getch();
+			switch (code)
+			{
+			case 75: {f = f*(-1);
+				if (f == 1) {
+					GotoXY(24, 16); SetColor(15, 0); printf("["); SetColor(0, 2); printf(Rus("да")); SetColor(15, 0); printf("]  ");
+					GotoXY(31, 16); SetColor(15, 0); printf("  ["); printf(Rus("нет")); SetColor(15, 0); printf("]");
+				}
+				else {
+					GotoXY(24, 16); SetColor(15, 0); printf("["); printf(Rus("да")); printf("]  ");
+					GotoXY(31, 16); SetColor(15, 0); printf("  ["); SetColor(0, 2); printf(Rus("нет")); SetColor(15, 0); printf("]");
+				}
+				break; }
+
+			case 77: {f = f*(-1);
+				if (f == 1) {
+					GotoXY(24, 16); SetColor(15, 0); printf("["); SetColor(0, 2); printf(Rus("да")); SetColor(15, 0); printf("]  ");
+					GotoXY(31, 16); SetColor(15, 0); printf("  ["); printf(Rus("нет")); SetColor(15, 0); printf("]");
+				}
+				else {
+					GotoXY(24, 16); SetColor(15, 0); printf("["); printf(Rus("да")); printf("]  ");
+					GotoXY(31, 16); SetColor(15, 0); printf("  ["); SetColor(0, 2); printf(Rus("нет")); SetColor(15, 0); printf("]");
+				}
+				break; }
+
+			}
+		}
+
+		else {
+			switch (code)
+			{
+			case 13: {GotoXY(24, 14); SetColor(0, 0); printf(Rus("              "));
+				GotoXY(24, 16); printf("              ");
+				if (f == 1) k = 1;  vih = 1; break; }
+			}
+
+		}
+
+	} while (vih == 0);
+	return k;
+}
+
+int moving(int pole[10][10], int i, int j, int x, int y, int e)
+{
+	GotoXY(e, y);
+	if (pole[i][j] == 3)
+	{
+		SetColor(0, 11);
+		printf("  ");
+	}
+	else
+
+	{
+		if (pole[i][j] == 2)
+		{
+			SetColor(0, 12);
+			printf("  ");
+		}
+		else
+		{
+			if ((i + j) % 2 != 0)
+			{
+				SetColor(0, 1);
+				printf("  ");
+			}
+			else
+			{
+				SetColor(0, 9);
+				printf("  ");
+			}
+		}
+	}
+	GotoXY(e, y + 1);
+	if (pole[i][j] == 3)
+	{
+		SetColor(0, 11);
+		printf("  ");
+	}
+	else
+	{
+		if (pole[i][j] == 2)
+		{
+			SetColor(0, 12);
+			printf("  ");
+		}
+		else
+		{
+			if ((i + j) % 2 != 0)
+			{
+				SetColor(0, 1); printf("  ");
+			}
+			else
+			{
+				SetColor(0, 9);
+				printf("  ");
+			}
+		}
+	}
+	return 0;
+}
+
+
 int player(int pole[10][10], int udar)
 {
 	GotoXY(27, 16); SetColor(0, 0); printf(Rus("        "));
-	int i, j, x, y, f, e, k = 0, pop, iper, jper; int vih, end;
+	int i, j, x, y, f, e, k = 0, pop, iper, jper, vih, end;
 	for (i = 0, x = 1; i<10, x<21; i++, x = x + 2)
 		for (j = 0, y = 1; j<10, y<21; j++, y = y + 2)
 
@@ -1839,14 +1764,14 @@ int player(int pole[10][10], int udar)
 		}
 	x = 1; y = 1;
 	i = j = 0;
-	e = x;
+	e = 1;
 	{
 
 		GotoXY(e, y); SetColor(0, 14); printf("  ");
 		GotoXY(e, y + 1); SetColor(0, 14); printf("  ");
 	}
 	do {
-		f = 0; pop = 0; GotoXY(24, 14); SetColor(15, 0); printf(Rus("  Ходит игрок "));
+		f = 0; pop = 0; GotoXY(24, 14); SetColor(12, 0); printf(Rus("  Ходит игрок "));
 		int code = _getch();
 		if (code == 224)
 		{
@@ -1858,102 +1783,80 @@ int player(int pole[10][10], int udar)
 			{
 				if (y != 1)
 				{
-
 					e = x;
 					{
 						i = e / 2;
 						j = y / 2;
-						GotoXY(e, y); if (pole[i][j] == 3) { SetColor(0, 11); printf("  "); }
-						else { if (pole[i][j] == 2) { SetColor(0, 12); printf("  "); } else { if ((i + j) % 2 != 0) { SetColor(0, 1); printf("  "); } else { SetColor(0, 9); printf("  "); } } }
-						GotoXY(e, y + 1); if (pole[i][j] == 3) { SetColor(0, 11); printf("  "); }
-						else { if (pole[i][j] == 2) { SetColor(0, 12); printf("  "); } else { if ((i + j) % 2 != 0) { SetColor(0, 1); printf("  "); } else { SetColor(0, 9); printf("  "); } } }
+						moving(pole, i, j, x, y, e);
 					}
 					y = y - 2;
 					e = x;
 					{
-						GotoXY(e, y); SetColor(0, 14); printf("  ");
-						GotoXY(e, y + 1); SetColor(0, 14); printf("  ");
+						GotoXY(e, y);
+						SetColor(0, 14);
+						printf("  ");
+						GotoXY(e, y + 1);
+						SetColor(0, 14);
+						printf("  ");
 					}
 				}
-
-
-
-
 				break;
-
 			}
 			case 77:
 			{
-
 				if (x != 19)
 				{
-					e = x; {
-						i = e / 2;
-						j = y / 2;
-						GotoXY(e, y); if (pole[i][j] == 3) { SetColor(0, 11); printf("  "); }
-						else { if (pole[i][j] == 2) { SetColor(0, 12); printf("  "); } else { if ((i + j) % 2 != 0) { SetColor(0, 1); printf("  "); } else { SetColor(0, 9); printf("  "); } } }
-						GotoXY(e, y + 1); if (pole[i][j] == 3) { SetColor(0, 11); printf("  "); }
-						else { if (pole[i][j] == 2) { SetColor(0, 12); printf("  "); } else { if ((i + j) % 2 != 0) { SetColor(0, 1); printf("  "); } else { SetColor(0, 9); printf("  "); } } }
-					}
+					e = x;
+					i = e / 2;
+					j = y / 2;
+					moving(pole, i, j, x, y, e);
 					x = x + 2;
 					e = x;
 					{
 						GotoXY(e, y); SetColor(0, 14); printf("  ");
 						GotoXY(e, y + 1); SetColor(0, 14); printf("  ");
-
 					}
 				}
-
-
 				break;
 			}
 			case 80:
 			{
-
-
 				if (y != 19)
 				{
-					e = x; {
-						i = e / 2;
-						j = y / 2;
-						GotoXY(e, y); if (pole[i][j] == 3) { SetColor(0, 11); printf("  "); }
-						else { if (pole[i][j] == 2) { SetColor(0, 12); printf("  "); } else { if ((i + j) % 2 != 0) { SetColor(0, 1); printf("  "); } else { SetColor(0, 9); printf("  "); } } }
-						GotoXY(e, y + 1); if (pole[i][j] == 3) { SetColor(0, 11); printf("  "); }
-						else { if (pole[i][j] == 2) { SetColor(0, 12); printf("  "); } else { if ((i + j) % 2 != 0) { SetColor(0, 1); printf("  "); } else { SetColor(0, 9); printf("  "); } } }
-					}
+					e = x;
+					i = e / 2;
+					j = y / 2;
+					moving(pole, i, j, x, y, e);
 					y = y + 2;
 					e = x;
 					{
-						GotoXY(e, y); SetColor(0, 14); printf("  ");
-						GotoXY(e, y + 1); SetColor(0, 14); printf("  ");
+						GotoXY(e, y);
+						SetColor(0, 14);
+						printf("  ");
+						GotoXY(e, y + 1);
+						printf("  ");
 					}
 				}
-
-
 				break;
 			}
 			case 75:
 			{
 				if (x != 1)
 				{
-					e = x; {
-						i = e / 2;
-						j = y / 2;
-						GotoXY(e, y); if (pole[i][j] == 3) { SetColor(0, 11); printf("  "); }
-						else { if (pole[i][j] == 2) { SetColor(0, 12); printf("  "); } else { if ((i + j) % 2 != 0) { SetColor(0, 1); printf("  "); } else { SetColor(0, 9); printf("  "); } } }
-						GotoXY(e, y + 1); if (pole[i][j] == 3) { SetColor(0, 11); printf("  "); }
-						else { if (pole[i][j] == 2) { SetColor(0, 12); printf("  "); } else { if ((i + j) % 2 != 0) { SetColor(0, 1); printf("  "); } else { SetColor(0, 9); printf("  "); } } }
-					}
+					e = x;
+					i = e / 2;
+					j = y / 2;
+					moving(pole, i, j, x, y, e);
 					x = x - 2;
 					e = x;
 					{
-						GotoXY(e, y); SetColor(0, 14); printf("  ");
-						GotoXY(e, y + 1); SetColor(0, 14); printf("  ");
-
+						GotoXY(e, y);
+						SetColor(0, 14);
+						printf("  ");
+						GotoXY(e, y + 1);
+						printf("  ");
 					}
 				}
-
-
 				break;
 			}
 			}
@@ -1962,7 +1865,6 @@ int player(int pole[10][10], int udar)
 			switch (code) {
 			case 13: {
 				int pr = f = 0;
-
 				pop = 0;
 				e = x;
 				int a = y;
@@ -1973,7 +1875,6 @@ int player(int pole[10][10], int udar)
 				if (pr == 0)
 				{
 					e = x;
-
 					i = e / 2;
 					j = y / 2;
 					if (pole[i][j] == 0)
@@ -1984,71 +1885,26 @@ int player(int pole[10][10], int udar)
 				}
 				break;
 			}
-			case 27: { f = 1;
-				GotoXY(24, 14); SetColor(15, 0); printf(Rus("    Выйти?    "));
-				GotoXY(24, 16); SetColor(15, 0); printf("["); SetColor(0, 2); printf(Rus("да")); SetColor(15, 0); printf("]  ");
-				GotoXY(31, 16); SetColor(15, 0); printf("  ["); printf(Rus("нет")); SetColor(15, 0); printf("]");
-				do {
-					k = 0; vih = 0;
-					int code = _getch();
-					if (code == 224)
-					{
-						code = _getch();
-						switch (code)
-						{
-						case 75: {f = f*(-1);
-							if (f == 1) {
-								GotoXY(24, 16); SetColor(15, 0); printf("["); SetColor(0, 2); printf(Rus("да")); SetColor(15, 0); printf("]  ");
-								GotoXY(31, 16); SetColor(15, 0); printf("  ["); printf(Rus("нет")); SetColor(15, 0); printf("]");
-							}
-							else {
-								GotoXY(24, 16); SetColor(15, 0); printf("["); printf(Rus("да")); printf("]  ");
-								GotoXY(31, 16); SetColor(15, 0); printf("  ["); SetColor(0, 2); printf(Rus("нет")); SetColor(15, 0); printf("]");
-							}
-							break; }
-
-						case 77: {f = f*(-1);
-							if (f == 1) {
-								GotoXY(24, 16); SetColor(15, 0); printf("["); SetColor(0, 2); printf(Rus("да")); SetColor(15, 0); printf("]  ");
-								GotoXY(31, 16); SetColor(15, 0); printf("  ["); printf(Rus("нет")); SetColor(15, 0); printf("]");
-							}
-							else {
-								GotoXY(24, 16); SetColor(15, 0); printf("["); printf(Rus("да")); printf("]  ");
-								GotoXY(31, 16); SetColor(15, 0); printf("  ["); SetColor(0, 2); printf(Rus("нет")); SetColor(15, 0); printf("]");
-							}
-							break; }
-
-						}
-					}
-
-					else {
-						switch (code)
-						{
-						case 13: {GotoXY(24, 14); SetColor(0, 0); printf(Rus("              "));
-							GotoXY(24, 16); printf("              ");
-							if (f == 1) k = 1;  vih = 1; break; }
-						}
-
-					}
-
-				} while (vih == 0);
-				break; }
-
+			case 27:
+			{
+				k = Exit(code);
+				break;
 			}
-
+			}
 			int mas[20][2], flag, sh = 0, a, b;
 			for (i = 0; i<10; i++)
 				for (j = 0; j<10; j++)
 				{
 					if (pole[i][j] == 1)
 					{
-						if (i>0)if (pole[i - 1][j] == 2) {
-							mas[sh][0] = i - 1; mas[sh][1] = j; sh++;
-							if (i>1)if (pole[i - 2][j] == 2) {
-								mas[sh][0] = i - 2; mas[sh][1] = j; sh++;
-								if (i>2)if (pole[i - 3][j] == 2) { mas[sh][0] = i - 3; mas[sh][1] = j; sh++; }
+						if (i>0)
+							if (pole[i - 1][j] == 2) {
+								mas[sh][0] = i - 1; mas[sh][1] = j; sh++;
+								if (i>1)if (pole[i - 2][j] == 2) {
+									mas[sh][0] = i - 2; mas[sh][1] = j; sh++;
+									if (i>2)if (pole[i - 3][j] == 2) { mas[sh][0] = i - 3; mas[sh][1] = j; sh++; }
+								}
 							}
-						}
 
 						if (i<9)if (pole[i + 1][j] == 2) {
 							mas[sh][0] = i + 1; mas[sh][1] = j; sh++;
@@ -2124,7 +1980,6 @@ int player(int pole[10][10], int udar)
 					}
 				}
 			x = iper; y = jper;
-
 			udar = 0;
 			for (i = 0; i<10; i++)
 				for (j = 0; j<10; j++)
@@ -2134,23 +1989,20 @@ int player(int pole[10][10], int udar)
 			{
 				f = 1; pop = 0;
 			}
-
 			if (k == 1)
 			{
 				udar = -1; f = 1;
 			}
 		}
-		GotoXY(20, 20);
+		GotoXY(25, 20);
 		printf("%d", udar);
 	} while ((f != 1 || pop != 0));
-
-
 	return udar;
 }
 
 int main()
 {
-label1:
+
 	int pole[10][10], mypole[10][10], x, y, ui, ud[2], hod[1];
 	int i, j, m, k;
 	keybd_event(VK_MENU, 0x38, 0, 0); //press ALT
@@ -2158,16 +2010,14 @@ label1:
 	keybd_event(VK_RETURN, 0x1c, KEYEVENTF_KEYUP, 0); //release ENTER
 	keybd_event(VK_MENU, 0x38, KEYEVENTF_KEYUP, 0); //release ALT
 	do {
-		m = menu();
-		ui = 0;
-		if (m == 1)
+		m = menu(); ui = 0; if (m == 1)
 		{
 			SetColor(0, 0);
 			system("cls");
 			int f = 1;
-			GotoXY(30, 10); SetColor(11, 0); printf(Rus("Расставить корабли"));
-			GotoXY(13, 13); SetColor(15, 0); printf("["); SetColor(0, 2); printf(Rus("автоматически")); SetColor(15, 0); printf("]");
-			GotoXY(33, 13); SetColor(15, 0); printf("["); printf(Rus("вручную(открыто только в премиум режиме)")); SetColor(15, 0); printf("]");
+			GotoXY(30, 10); SetColor(15, 0); printf(Rus("Расставить корабли"));
+			GotoXY(23, 13); SetColor(15, 0); printf("["); SetColor(0, 2); printf(Rus("автоматически")); SetColor(15, 0); printf("]");
+			GotoXY(43, 13); SetColor(15, 0); printf("["); printf(Rus("вручную")); SetColor(15, 0); printf("]");
 			do {
 				k = 0;
 				int code = _getch();
@@ -2176,25 +2026,25 @@ label1:
 					code = _getch();
 					switch (code)
 					{
-					case 75: {f = f*(-1);//выбор
+					case 75: {f = f*(-1);
 						if (f == 1) {
-							GotoXY(13, 13); SetColor(15, 0); printf("["); SetColor(0, 2); printf(Rus("автоматически")); SetColor(15, 0); printf("]");
-							GotoXY(33, 13); SetColor(15, 0); printf("["); printf(Rus("вручную(открыто только в премиум режиме)")); SetColor(15, 0); printf("]");
+							GotoXY(23, 13); SetColor(15, 0); printf("["); SetColor(0, 2); printf(Rus("автоматически")); SetColor(15, 0); printf("]");
+							GotoXY(43, 13); SetColor(15, 0); printf("["); printf(Rus("вручную")); SetColor(15, 0); printf("]");
 						}
 						else {
-							GotoXY(13, 13); SetColor(15, 0); printf("["); printf(Rus("автоматически")); printf("]");
-							GotoXY(33, 13); SetColor(15, 0); printf("["); SetColor(0, 2); printf(Rus("вручную(открыто только в премиум режиме)")); SetColor(15, 0); printf("]");
+							GotoXY(23, 13); SetColor(15, 0); printf("["); printf(Rus("автоматически")); printf("]");
+							GotoXY(43, 13); SetColor(15, 0); printf("["); SetColor(0, 2); printf(Rus("вручную")); SetColor(15, 0); printf("]");
 						}
 						break; }
 
 					case 77: {f = f*(-1);
 						if (f == 1) {
-							GotoXY(13, 13); SetColor(15, 0); printf("["); SetColor(0, 2); printf(Rus("автоматически")); SetColor(15, 0); printf("]");
-							GotoXY(33, 13); SetColor(15, 0); printf("["); printf(Rus("вручную(открыто только в премиум режиме)")); SetColor(15, 0); printf("]");
+							GotoXY(23, 13); SetColor(15, 0); printf("["); SetColor(0, 2); printf(Rus("автоматически")); SetColor(15, 0); printf("]");
+							GotoXY(43, 13); SetColor(15, 0); printf("["); printf(Rus("вручную")); SetColor(15, 0); printf("]");
 						}
 						else {
-							GotoXY(13, 13); SetColor(15, 0); printf("["); printf(Rus("автоматически")); printf("]");
-							GotoXY(33, 13); SetColor(15, 0); printf("["); SetColor(0, 2); printf(Rus("вручную(открыто только в премиум режиме)")); SetColor(15, 0); printf("]");
+							GotoXY(23, 13); SetColor(15, 0); printf("["); printf(Rus("автоматически")); printf("]");
+							GotoXY(43, 13); SetColor(15, 0); printf("["); SetColor(0, 2); printf(Rus("вручную")); SetColor(15, 0); printf("]");
 						}
 						break; }
 
@@ -2211,44 +2061,42 @@ label1:
 
 			} while (k == 0);
 
-			if (f == 1) 
+			if (f == 1)
 			{
-				system("cls");
 				sheeps(mypole);
+				bonus(mypole);
 			}
-			else 
-			{
-				system("cls");
+			else {
 				SetColor(0, 0);
-				vivod(pole);
+
+				//vivod(pole);
+
+
 				ui = ras(mypole);
+				bonus(mypole);
 			}
-			if (ui == 0) 
-			{
+			if (ui == 0) {
 				SetColor(0, 0);
 				system("cls");
 				GotoXY(30, 10);
+				SetColor(6, 0);
+				printf(Rus("Расстановка кораблей"));
 				SetColor(15, 0);
-				
-					ui == 0;
-					printf(Rus("Расстановка кораблей"));
-
-					for (i = 1; i <= 100; i++)
+				for (i = 1; i <= 100; i++)
+				{
+					GotoXY(62, 15);
+					SetColor(15, 0); printf("%d%%", i);
+					if (i % 2 == 0)
 					{
-						GotoXY(62, 15);
-						SetColor(15, 0); printf("%d%%", i);
-						if (i % 2 == 0)
-						{
-							GotoXY(10 + (i / 2), 15);
-							SetColor(0, 15); printf(" ");
-							sheeps(pole);
-						}Sleep(50);
-					}
-				
+						GotoXY(10 + (i / 2), 15);
+						SetColor(0, 15); printf(" ");
+						sheeps(pole); bonus(pole);
+					}Sleep(50);
+				}
 				SetColor(0, 0);
 				system("cls");
 				f = 1;
-				GotoXY(30, 10); SetColor(15, 0); printf(Rus("Кто ходит первым?"));//выбор
+				GotoXY(30, 10); SetColor(15, 0); printf(Rus("Кто ходит первым?"));
 				GotoXY(23, 13); SetColor(15, 0); printf("["); SetColor(0, 2); printf(Rus("компьютер")); SetColor(15, 0); printf("]");
 				GotoXY(43, 13); SetColor(15, 0); printf("["); printf(Rus("игрок")); SetColor(15, 0); printf("]");
 				do {
@@ -2295,131 +2143,33 @@ label1:
 				} while (k == 0);
 
 				int chislocomp = 0, chislomy = 0;
-				SetColor(15, 0);
 				system("cls");
-				SetColor(15, 0);
-	printf("\xc9\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xBB\n");
-	printf("\xba"); printf("\t\t     "); printf("\xba\n");
-	printf("\xba"); printf("\t\t     "); printf("\xba\n");
-	printf("\xba"); printf("\t\t     "); printf("\xba\n");
-	printf("\xba"); printf("\t\t     "); printf("\xba\n");
-	printf("\xba"); printf("\t\t     "); printf("\xba\n");
-	printf("\xba"); printf("\t\t     "); printf("\xba\n");
-	printf("\xba"); printf("\t\t     "); printf("\xba\n");
-	printf("\xba"); printf("\t\t     "); printf("\xba\n");
-	printf("\xba"); printf("\t\t     "); printf("\xba\n");
-	printf("\xba"); printf("\t\t     "); printf("\xba\n");
-	printf("\xba"); printf("\t\t     "); printf("\xba\n");
-	printf("\xba"); printf("\t\t     "); printf("\xba\n");
-	printf("\xba"); printf("\t\t     "); printf("\xba\n");
-	printf("\xba"); printf("\t\t     "); printf("\xba\n");
-	printf("\xba"); printf("\t\t     "); printf("\xba\n");
-	printf("\xba"); printf("\t\t     "); printf("\xba\n");
-	printf("\xba"); printf("\t\t     "); printf("\xba\n");
-	printf("\xba"); printf("\t\t     "); printf("\xba\n");
-	printf("\xba"); printf("\t\t     "); printf("\xba\n");
-	printf("\xba"); printf("\t\t     "); printf("\xba\n");
-	printf("\xc8\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xBC\n");
-
-
-	GotoXY(40, 0); printf("\xc9\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xBB\n");
-	GotoXY(40, 1); printf("\xba"); printf("\t\t     "); printf("\xba\n");
-	GotoXY(40, 2); printf("\xba"); printf("\t\t     "); printf("\xba\n");
-	GotoXY(40, 3); printf("\xba"); printf("\t\t     "); printf("\xba\n");
-	GotoXY(40, 4); printf("\xba"); printf("\t\t     "); printf("\xba\n");
-	GotoXY(40, 5); printf("\xba"); printf("\t\t     "); printf("\xba\n");
-	GotoXY(40, 6); printf("\xba"); printf("\t\t     "); printf("\xba\n");
-	GotoXY(40, 7); printf("\xba"); printf("\t\t     "); printf("\xba\n");
-	GotoXY(40, 8); printf("\xba"); printf("\t\t     "); printf("\xba\n");
-	GotoXY(40, 9); printf("\xba"); printf("\t\t     "); printf("\xba\n");
-	GotoXY(40, 10); printf("\xba"); printf("\t\t     "); printf("\xba\n");
-	GotoXY(40, 11); printf("\xba"); printf("\t\t     "); printf("\xba\n");
-	GotoXY(40, 12); printf("\xba"); printf("\t\t     "); printf("\xba\n");
-	GotoXY(40, 13); printf("\xba"); printf("\t\t     "); printf("\xba\n");
-	GotoXY(40, 14); printf("\xba"); printf("\t\t     "); printf("\xba\n");
-	GotoXY(40, 15); printf("\xba"); printf("\t\t     "); printf("\xba\n");
-	GotoXY(40, 16); printf("\xba"); printf("\t\t     "); printf("\xba\n");
-	GotoXY(40, 17); printf("\xba"); printf("\t\t     "); printf("\xba\n");
-	GotoXY(40, 18); printf("\xba"); printf("\t\t     "); printf("\xba\n");
-	GotoXY(40, 19); printf("\xba"); printf("\t\t     "); printf("\xba\n");
-	GotoXY(40, 20); printf("\xba"); printf("\t\t     "); printf("\xba\n");
-	GotoXY(40, 21); printf("\xc8\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xBC\n");
+				write();
 
 				for (i = 0, x = 1; i<10, x<21; i++, x = x + 2)
 					for (j = 0, y = 1; j<10, y<21; j++, y = y + 2)
 
 					{
-						GotoXY(x, y);
-						if ((j + i) % 2 != 0) 
-						{ 
-						   SetColor(0, 1);
-						   printf("  ");
-						}
-						else 
-						{ 
-							SetColor(0, 9);
-							printf("  "); }
-						    GotoXY(x, y + 1);
-							if ((j + i) % 2 != 0) 
-							{ 
-								SetColor(0, 1);
-							    printf("  ");
-							}
-						else 
-						{ 
-							SetColor(0, 9);
-							printf("  ");
-						}
+						GotoXY(x, y);  if ((j + i) % 2 != 0) { SetColor(0, 1); printf("  "); }
+						else { SetColor(0, 9); printf("  "); }
+						GotoXY(x, y + 1); if ((j + i) % 2 != 0) { SetColor(0, 1); printf("  "); }
+						else { SetColor(0, 9); printf("  "); }
 					}
 
 				for (i = 0, x = 41; i<10, x<61; i++, x = x + 2)
 					for (j = 0, y = 1; j<10, y<21; j++, y = y + 2)
 
 					{
-						GotoXY(x, y);
-						if (mypole[i][j] == 1) 
-						{ 
-							SetColor(0, 12);
-							printf("  ");
-						}
-						else 
-						{ 
-							if ((j + i) % 2 != 0) 
-							{ 
-								SetColor(0, 1); 
-								printf("  "); 
-							} 
-							else 
-							{ 
-								SetColor(0, 9);
-								printf("  "); 
-							} 
-						}
-						GotoXY(x, y + 1);
-						if (mypole[i][j] == 1) 
-						{
-							SetColor(0, 12);
-							printf("  ");
-						}
-						else 
-						{ 
-							if ((j + i) % 2 != 0) 
-							{ 
-								SetColor(0, 1);
-								printf("  ");
-							}
-							else
-							{ 
-								SetColor(0, 9);
-								printf("  ");
-							} 
-						}
+						GotoXY(x, y); if (mypole[i][j] == 1) { SetColor(0, 12); printf("  "); }
+						else { if ((j + i) % 2 != 0) { SetColor(0, 1); printf("  "); } else { SetColor(0, 9); printf("  "); } }
+						GotoXY(x, y + 1); if (mypole[i][j] == 1) { SetColor(0, 12); printf("  "); }
+						else { if ((j + i) % 2 != 0) { SetColor(0, 1); printf("  "); } else { SetColor(0, 9); printf("  "); } }
 					}
 
-				GotoXY(22, 8); SetColor(15, 0); printf(Rus("потверждение-enter"));
-				GotoXY(23, 9); SetColor(15, 0); printf(Rus("наведение-стрелки"));
-				GotoXY(26, 10); SetColor(15, 0); printf(Rus("Выход-Esc"));
-				GotoXY(22, 12); SetColor(15, 0); printf(Rus("датчик трансляции"));
+				GotoXY(25, 8); SetColor(14, 0); printf(Rus("принять-enter"));
+				GotoXY(22, 9); SetColor(2, 0); printf(Rus("управление-стрелки"));
+				GotoXY(26, 10); SetColor(14, 0); printf(Rus("Выход-Esc"));
+				GotoXY(24, 12); SetColor(15, 0); printf(Rus("окно сообщений"));
 				GotoXY(23, 13); printf("\xc9\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xBB\n");
 				GotoXY(23, 14); printf("\xba"); printf("\t      "); printf("\xba\n");
 				GotoXY(23, 15); printf("\xba"); printf("\t      "); printf("\xba\n");
@@ -2432,10 +2182,7 @@ label1:
 
 				while (chislocomp<20 && chislomy<20)
 				{
-					if (chislomy == -1) 
-					{ 
-						break;
-					}
+					if (chislomy == -1) { break; }
 					if (chislocomp != 20 && chislomy != 20)
 					{
 						if (f == 1)
@@ -2455,20 +2202,21 @@ label1:
 				if (chislocomp == 20)
 				{
 					GotoXY(33, 14); SetColor(0, 12);
-					printf(Rus("Разгром!")); fflush(stdin); _getch(); fflush(stdin);
+					printf(Rus("Вы проиграли")); fflush(stdin); _getch(); fflush(stdin);
 				}
 				if (chislomy == 20)
 				{
 					GotoXY(33, 14); SetColor(0, 12);
-					printf(Rus("Победа!")); fflush(stdin); _getch(); fflush(stdin);
+					printf(Rus("Вы выиграли!")); fflush(stdin); _getch(); fflush(stdin);
 				}
 
 			}
 		}
-		vivod(mypole);
+		// vivod(mypole);
 	} while (m == 1);
 
 }
+
 
 
 
