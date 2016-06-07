@@ -7,7 +7,7 @@
 #include <windows.h>
 
 HANDLE hConsole;
-//HANDLE hStdout, hStdin;
+HANDLE hStdout, hStdin;
 HANDLE hStdOut = GetStdHandle(STD_OUTPUT_HANDLE);
 
 void GotoXY(int X, int Y)
@@ -62,19 +62,15 @@ int sheeps(int pole[10][10])
 	for (i = 0; i<10; i++)
 		for (j = 0; j<10; j++)
 			pole[i][j] = 0;
+	
 
-	do {
 		f = 0;
-		rand_chislo = 0 + rand() % 10;
-		rand_chislo1 = 0 + rand() % 10;
+		rand_chislo = 3 + rand() % 3;
+		rand_chislo1 = 3 + rand() % 3;
 
 		ts = 1 + rand() % 4;
 
-		if (ts == 1) { for (i = 0; i<3; i++) if (rand_chislo == i)f = 1; }
-		if (ts == 2) { for (i = 7; i<10; i++) if (rand_chislo == i)f = 1; }
-		if (ts == 3) { for (i = 0; i<3; i++) if (rand_chislo1 == i)f = 1; }
-		if (ts == 4) { for (i = 7; i<10; i++) if (rand_chislo1 == i)f = 1; }
-	} while (f == 1);
+		
 	switch (ts) {
 	case 1: pole[rand_chislo][rand_chislo1] = 1; pole[rand_chislo - 1][rand_chislo1] = 1;
 		pole[rand_chislo - 2][rand_chislo1] = 1; pole[rand_chislo - 3][rand_chislo1] = 1; break;
@@ -95,68 +91,85 @@ int sheeps(int pole[10][10])
 	{
 		do {
 			f = 0;
-			rand_chislo = 0 + rand() % 10;
-			rand_chislo1 = 0 + rand() % 10;
+			rand_chislo = 2 + rand() % 4;
+			rand_chislo1 = 2 + rand() % 4;
 
 			ts = 1 + rand() % 4;
 
-			if (ts == 1) {
-				if (rand_chislo != 0) {
+			if (ts == 1)
+			{
+				if (rand_chislo != 0) 
+				{
 					for (i = rand_chislo - 2; i<rand_chislo + 2; i++)
-						for (j = rand_chislo1 - 1; j <= rand_chislo1 + 1; j++)
-						{
-							if (pole[i][j] != 0) { f = 1; }
-						}
+						for (j = rand_chislo1 - 1; j <= rand_chislo1 + 1; j++)	
+							if (pole[i][j] != 0)
+					    	      f = 1;					    
 				}
 				else f = 1;
 			}
-			if (ts == 2) {
-				if (rand_chislo != 9) {
+			if (ts == 2) 
+			{
+				if (rand_chislo != 9)
+				{
 					for (i = rand_chislo - 1; i <= rand_chislo + 2; i++)
-						for (j = rand_chislo1 - 1; j <= rand_chislo1 + 1; j++)
-						{
-							if (pole[i][j] != 0) { f = 1; }
-						}
+						for (j = rand_chislo1 - 1; j <= rand_chislo1 + 1; j++)						
+							if (pole[i][j] != 0) 
+								f = 1; 						
 				}
 				else f = 1;
 			}
-			if (ts == 3) {
-				if (rand_chislo1 != 0) {
+			if (ts == 3) 
+			{
+				if (rand_chislo1 != 0) 
+				{
 					for (i = rand_chislo - 1; i <= rand_chislo + 1; i++)
-						for (j = rand_chislo1 - 2; j <= rand_chislo1 + 1; j++)
-						{
-							if (pole[i][j] != 0) { f = 1; }
-						}
+						for (j = rand_chislo1 - 2; j <= rand_chislo1 + 1; j++)						
+							if (pole[i][j] != 0) 
+								f = 1; 						
 				}
 				else f = 1;
 			}
-			if (ts == 4) {
-				if (rand_chislo1 != 9) {
+			if (ts == 4) 
+			{
+				if (rand_chislo1 != 9)
+				{
 					for (i = rand_chislo - 1; i <= rand_chislo + 1; i++)
-						for (j = rand_chislo1 - 1; j <= rand_chislo1 + 2; j++)
-						{
-							if (pole[i][j] != 0) { f = 1; }
-						}
+						for (j = rand_chislo1 - 1; j <= rand_chislo1 + 2; j++)						
+							if (pole[i][j] != 0) 
+								f = 1; 						
 				}
 				else f = 1;
 			}
 		} while (f == 1);
-		switch (ts) {
-		case 1: pole[rand_chislo][rand_chislo1] = 1; pole[rand_chislo - 1][rand_chislo1] = 1; break;
-		case 2: pole[rand_chislo][rand_chislo1] = 1; pole[rand_chislo + 1][rand_chislo1] = 1; break;
-		case 3: pole[rand_chislo][rand_chislo1] = 1; pole[rand_chislo][rand_chislo1 - 1] = 1; break;
-		case 4: pole[rand_chislo][rand_chislo1] = 1; pole[rand_chislo][rand_chislo1 + 1] = 1; break;
+		switch (ts) 
+		{
+		case 1: 
+			pole[rand_chislo][rand_chislo1] = 1;
+			pole[rand_chislo - 1][rand_chislo1] = 1;
+			break;
+		case 2: 
+			pole[rand_chislo][rand_chislo1] = 1;
+			pole[rand_chislo + 1][rand_chislo1] = 1;
+			break;
+		case 3: 
+			pole[rand_chislo][rand_chislo1] = 1;
+			pole[rand_chislo][rand_chislo1 - 1] = 1;
+			break;
+		case 4: 
+			pole[rand_chislo][rand_chislo1] = 1;
+			pole[rand_chislo][rand_chislo1 + 1] = 1;
+			break;
 		}
 
 
 	}
 
-	for (k = 0; k<2; k++)                                       //?annoaiiaea o?ieiuo ei?aaeae
+	for (k = 0; k<2; k++)                                    
 	{
 		do {
 			f = 0;
-			rand_chislo = 0 + rand() % 10;
-			rand_chislo1 = 0 + rand() % 10;
+			rand_chislo = 1 + rand() % 5;
+			rand_chislo1 = 1 + rand() % 5;
 
 			ts = 1 + rand() % 4;
 
@@ -230,7 +243,7 @@ int sheeps(int pole[10][10])
 
 
 
-	/*   for (i=0;i<10;i++)                     //einoueu aey i?iniio?a ei?aaeae
+	/*   for (i=0;i<10;i++)                    
 	{for (r=0;r<3;r++){for (j=0;j<10;j++)
 	{if (pole[i][j]==0){ if(r==0) printf ("%c%c%c%c%c",a,b,b,b,c);
 	if(r==1) printf ("%c   %c",d,d);
@@ -248,6 +261,7 @@ int sheeps(int pole[10][10])
 int vivod(int pole[10][10])
 {
 	int i, j, x, y;
+	// 1 player
 	printf("\xc9\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xBB\n");
 	printf("\xba"); printf("\t\t     "); printf("\xba\n");
 	printf("\xba"); printf("\t\t     "); printf("\xba\n");
@@ -271,29 +285,29 @@ int vivod(int pole[10][10])
 	printf("\xba"); printf("\t\t     "); printf("\xba\n");
 	printf("\xc8\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xBC\n");
 
-
-	GotoXY(40, 0); printf("\xc9\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xBB\n");
-	GotoXY(40, 1); printf("\xba"); printf("\t\t       "); printf("\xba\n");
-	GotoXY(40, 2); printf("\xba"); printf("\t\t       "); printf("\xba\n");
-	GotoXY(40, 3); printf("\xba"); printf("\t\t       "); printf("\xba\n");
-	GotoXY(40, 4); printf("\xba"); printf("\t\t       "); printf("\xba\n");
-	GotoXY(40, 5); printf("\xba"); printf("\t\t       "); printf("\xba\n");
-	GotoXY(40, 6); printf("\xba"); printf("\t\t       "); printf("\xba\n");
-	GotoXY(40, 7); printf("\xba"); printf("\t\t       "); printf("\xba\n");
-	GotoXY(40, 8); printf("\xba"); printf("\t\t       "); printf("\xba\n");
-	GotoXY(40, 9); printf("\xba"); printf("\t\t       "); printf("\xba\n");
-	GotoXY(40, 10); printf("\xba"); printf("\t\t       "); printf("\xba\n");
-	GotoXY(40, 11); printf("\xba"); printf("\t\t       "); printf("\xba\n");
-	GotoXY(40, 12); printf("\xba"); printf("\t\t       "); printf("\xba\n");
-	GotoXY(40, 13); printf("\xba"); printf("\t\t       "); printf("\xba\n");
-	GotoXY(40, 14); printf("\xba"); printf("\t\t       "); printf("\xba\n");
-	GotoXY(40, 15); printf("\xba"); printf("\t\t       "); printf("\xba\n");
-	GotoXY(40, 16); printf("\xba"); printf("\t\t       "); printf("\xba\n");
-	GotoXY(40, 17); printf("\xba"); printf("\t\t       "); printf("\xba\n");
-	GotoXY(40, 18); printf("\xba"); printf("\t\t       "); printf("\xba\n");
-	GotoXY(40, 19); printf("\xba"); printf("\t\t       "); printf("\xba\n");
-	GotoXY(40, 20); printf("\xba"); printf("\t\t       "); printf("\xba\n");
-	GotoXY(40, 21); printf("\xc8\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xBC\n");
+	// 2 player
+	GotoXY(40, 0); printf("\xc9\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xBB\n");
+	GotoXY(40, 1); printf("\xba"); printf("\t\t     "); printf("\xba\n");
+	GotoXY(40, 2); printf("\xba"); printf("\t\t     "); printf("\xba\n");
+	GotoXY(40, 3); printf("\xba"); printf("\t\t     "); printf("\xba\n");
+	GotoXY(40, 4); printf("\xba"); printf("\t\t     "); printf("\xba\n");
+	GotoXY(40, 5); printf("\xba"); printf("\t\t     "); printf("\xba\n");
+	GotoXY(40, 6); printf("\xba"); printf("\t\t     "); printf("\xba\n");
+	GotoXY(40, 7); printf("\xba"); printf("\t\t     "); printf("\xba\n");
+	GotoXY(40, 8); printf("\xba"); printf("\t\t     "); printf("\xba\n");
+	GotoXY(40, 9); printf("\xba"); printf("\t\t     "); printf("\xba\n");
+	GotoXY(40, 10); printf("\xba"); printf("\t\t     "); printf("\xba\n");
+	GotoXY(40, 11); printf("\xba"); printf("\t\t     "); printf("\xba\n");
+	GotoXY(40, 12); printf("\xba"); printf("\t\t     "); printf("\xba\n");
+	GotoXY(40, 13); printf("\xba"); printf("\t\t     "); printf("\xba\n");
+	GotoXY(40, 14); printf("\xba"); printf("\t\t     "); printf("\xba\n");
+	GotoXY(40, 15); printf("\xba"); printf("\t\t     "); printf("\xba\n");
+	GotoXY(40, 16); printf("\xba"); printf("\t\t     "); printf("\xba\n");
+	GotoXY(40, 17); printf("\xba"); printf("\t\t     "); printf("\xba\n");
+	GotoXY(40, 18); printf("\xba"); printf("\t\t     "); printf("\xba\n");
+	GotoXY(40, 19); printf("\xba"); printf("\t\t     "); printf("\xba\n");
+	GotoXY(40, 20); printf("\xba"); printf("\t\t     "); printf("\xba\n");
+	GotoXY(40, 21); printf("\xc8\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xBC\n");
 
 	for (i = 0, x = 1; i<10, x<21; i++, x = x + 2)
 		for (j = 0, y = 1; j<10, y<21; j++, y = y + 2)
@@ -422,8 +436,8 @@ int ras(int mypole[10][10])
 							{
 								i = (e - 40) / 2;
 								j = y / 2;
-								GotoXY(e, y); if ((i + j) % 2 != 0) { SetColor(0, 1); printf("  "); }
-								else { SetColor(0, 9); printf("  "); }
+								GotoXY(e, y); if ((i + j) % 2 != 0) { SetColor(0, 2); printf("  "); }
+								else { SetColor(0, 10); printf("  "); }
 								GotoXY(e, y + 1); if ((i + j) % 2 != 0) { SetColor(0, 1); printf("  "); }
 								else { SetColor(0, 9); printf("  "); }
 							}
@@ -1483,8 +1497,8 @@ int menu()
 	int f = 1, k;
 	SetColor(0, 0);
 	system("cls");
-	GotoXY(30, 10); SetColor(10, 0); printf(Rus("Главное меню"));
-	GotoXY(30, 12); SetColor(15, 0); printf("["); SetColor(0, 5); printf(Rus("Новая игра")); SetColor(15, 0); printf("]");
+	GotoXY(30, 10); SetColor(12, 0); printf(Rus("Главное меню"));
+	GotoXY(30, 12); SetColor(15, 0); printf("["); SetColor(0, 2); printf(Rus("Новая игра")); SetColor(15, 0); printf("]");
 	GotoXY(32, 13); SetColor(15, 0); printf("["); printf(Rus("выход")); SetColor(15, 0); printf("]");
 	do {
 		k = 0;
@@ -1519,7 +1533,8 @@ int menu()
 			}
 		}
 
-		else {
+		else
+		{
 			switch (code)
 			{
 			case 13: k = 1; break;
@@ -1538,14 +1553,21 @@ int comp(int mypole[10][10], int udar, int ud[2], int hod[1])  // ИИ
 	int pri, prj;
 
 
-	srand(time(NULL)); GotoXY(24, 14); SetColor(12, 0); printf(Rus("  Ходит комп "));
+	srand(time(NULL));
+	GotoXY(24, 14);
+	SetColor(9, 0);
+	printf(Rus("  Ходит комп "));
 	do {
-		f = 1; per = 0; k = 0; GotoXY(28, 16); SetColor(15, 0); printf(Rus("      ")); Sleep(1000);
+		f = 1;
+		per = 0;
+		k = 0;
+		GotoXY(28, 16);
+		SetColor(15, 0);
+		printf(Rus("      "));
+		Sleep(1000);
 
-
-
-
-		h = 0; if (hod[0] == 5) {
+		h = 0; if (hod[0] == 5) 
+		{
 			for (n = ud[0] - 1; n <= ud[0] + 1 && n<10; n++)
 				for (m = ud[1] - 1; m <= ud[1] + 1 && m<10; m++)
 					if (mypole[n][m] == 1)
@@ -2128,7 +2150,7 @@ int player(int pole[10][10], int udar)
 
 int main()
 {
-
+label1:
 	int pole[10][10], mypole[10][10], x, y, ui, ud[2], hod[1];
 	int i, j, m, k;
 	keybd_event(VK_MENU, 0x38, 0, 0); //press ALT
@@ -2143,9 +2165,9 @@ int main()
 			SetColor(0, 0);
 			system("cls");
 			int f = 1;
-			GotoXY(30, 10); SetColor(15, 0); printf(Rus("Расставить корабли"));
-			GotoXY(23, 13); SetColor(15, 0); printf("["); SetColor(0, 2); printf(Rus("автоматически")); SetColor(15, 0); printf("]");
-			GotoXY(43, 13); SetColor(15, 0); printf("["); printf(Rus("вручную")); SetColor(15, 0); printf("]");
+			GotoXY(30, 10); SetColor(11, 0); printf(Rus("Расставить корабли"));
+			GotoXY(13, 13); SetColor(15, 0); printf("["); SetColor(0, 2); printf(Rus("автоматически")); SetColor(15, 0); printf("]");
+			GotoXY(33, 13); SetColor(15, 0); printf("["); printf(Rus("вручную(открыто только в премиум режиме)")); SetColor(15, 0); printf("]");
 			do {
 				k = 0;
 				int code = _getch();
@@ -2154,25 +2176,25 @@ int main()
 					code = _getch();
 					switch (code)
 					{
-					case 75: {f = f*(-1);
+					case 75: {f = f*(-1);//выбор
 						if (f == 1) {
-							GotoXY(23, 13); SetColor(15, 0); printf("["); SetColor(0, 2); printf(Rus("автоматически")); SetColor(15, 0); printf("]");
-							GotoXY(43, 13); SetColor(15, 0); printf("["); printf(Rus("вручную")); SetColor(15, 0); printf("]");
+							GotoXY(13, 13); SetColor(15, 0); printf("["); SetColor(0, 2); printf(Rus("автоматически")); SetColor(15, 0); printf("]");
+							GotoXY(33, 13); SetColor(15, 0); printf("["); printf(Rus("вручную(открыто только в премиум режиме)")); SetColor(15, 0); printf("]");
 						}
 						else {
-							GotoXY(23, 13); SetColor(15, 0); printf("["); printf(Rus("автоматически")); printf("]");
-							GotoXY(43, 13); SetColor(15, 0); printf("["); SetColor(0, 2); printf(Rus("вручную")); SetColor(15, 0); printf("]");
+							GotoXY(13, 13); SetColor(15, 0); printf("["); printf(Rus("автоматически")); printf("]");
+							GotoXY(33, 13); SetColor(15, 0); printf("["); SetColor(0, 2); printf(Rus("вручную(открыто только в премиум режиме)")); SetColor(15, 0); printf("]");
 						}
 						break; }
 
 					case 77: {f = f*(-1);
 						if (f == 1) {
-							GotoXY(23, 13); SetColor(15, 0); printf("["); SetColor(0, 2); printf(Rus("автоматически")); SetColor(15, 0); printf("]");
-							GotoXY(43, 13); SetColor(15, 0); printf("["); printf(Rus("вручную")); SetColor(15, 0); printf("]");
+							GotoXY(13, 13); SetColor(15, 0); printf("["); SetColor(0, 2); printf(Rus("автоматически")); SetColor(15, 0); printf("]");
+							GotoXY(33, 13); SetColor(15, 0); printf("["); printf(Rus("вручную(открыто только в премиум режиме)")); SetColor(15, 0); printf("]");
 						}
 						else {
-							GotoXY(23, 13); SetColor(15, 0); printf("["); printf(Rus("автоматически")); printf("]");
-							GotoXY(43, 13); SetColor(15, 0); printf("["); SetColor(0, 2); printf(Rus("вручную")); SetColor(15, 0); printf("]");
+							GotoXY(13, 13); SetColor(15, 0); printf("["); printf(Rus("автоматически")); printf("]");
+							GotoXY(33, 13); SetColor(15, 0); printf("["); SetColor(0, 2); printf(Rus("вручную(открыто только в премиум режиме)")); SetColor(15, 0); printf("]");
 						}
 						break; }
 
@@ -2189,37 +2211,44 @@ int main()
 
 			} while (k == 0);
 
-			if (f == 1) { sheeps(mypole); }
-			else {
+			if (f == 1) 
+			{
+				system("cls");
+				sheeps(mypole);
+			}
+			else 
+			{
+				system("cls");
 				SetColor(0, 0);
-
 				vivod(pole);
-
-
 				ui = ras(mypole);
 			}
-			if (ui == 0) {
+			if (ui == 0) 
+			{
 				SetColor(0, 0);
 				system("cls");
 				GotoXY(30, 10);
 				SetColor(15, 0);
-				printf(Rus("Расстановка кораблей"));
+				
+					ui == 0;
+					printf(Rus("Расстановка кораблей"));
 
-				for (i = 1; i <= 100; i++)
-				{
-					GotoXY(62, 15);
-					SetColor(15, 0); printf("%d%%", i);
-					if (i % 2 == 0)
+					for (i = 1; i <= 100; i++)
 					{
-						GotoXY(10 + (i / 2), 15);
-						SetColor(0, 15); printf(" ");
-						sheeps(pole);
-					}Sleep(50);
-				}
+						GotoXY(62, 15);
+						SetColor(15, 0); printf("%d%%", i);
+						if (i % 2 == 0)
+						{
+							GotoXY(10 + (i / 2), 15);
+							SetColor(0, 15); printf(" ");
+							sheeps(pole);
+						}Sleep(50);
+					}
+				
 				SetColor(0, 0);
 				system("cls");
 				f = 1;
-				GotoXY(30, 10); SetColor(15, 0); printf(Rus("Кто ходит первым?"));
+				GotoXY(30, 10); SetColor(15, 0); printf(Rus("Кто ходит первым?"));//выбор
 				GotoXY(23, 13); SetColor(15, 0); printf("["); SetColor(0, 2); printf(Rus("компьютер")); SetColor(15, 0); printf("]");
 				GotoXY(43, 13); SetColor(15, 0); printf("["); printf(Rus("игрок")); SetColor(15, 0); printf("]");
 				do {
@@ -2268,77 +2297,129 @@ int main()
 				int chislocomp = 0, chislomy = 0;
 				SetColor(15, 0);
 				system("cls");
-				printf("\xc9\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xBB\n");
-				printf("\xba"); printf("\t\t     "); printf("\xba\n");
-				printf("\xba"); printf("\t\t     "); printf("\xba\n");
-				printf("\xba"); printf("\t\t     "); printf("\xba\n");
-				printf("\xba"); printf("\t\t     "); printf("\xba\n");
-				printf("\xba"); printf("\t\t     "); printf("\xba\n");
-				printf("\xba"); printf("\t\t     "); printf("\xba\n");
-				printf("\xba"); printf("\t\t     "); printf("\xba\n");
-				printf("\xba"); printf("\t\t     "); printf("\xba\n");
-				printf("\xba"); printf("\t\t     "); printf("\xba\n");
-				printf("\xba"); printf("\t\t     "); printf("\xba\n");
-				printf("\xba"); printf("\t\t     "); printf("\xba\n");
-				printf("\xba"); printf("\t\t     "); printf("\xba\n");
-				printf("\xba"); printf("\t\t     "); printf("\xba\n");
-				printf("\xba"); printf("\t\t     "); printf("\xba\n");
-				printf("\xba"); printf("\t\t     "); printf("\xba\n");
-				printf("\xba"); printf("\t\t     "); printf("\xba\n");
-				printf("\xba"); printf("\t\t     "); printf("\xba\n");
-				printf("\xba"); printf("\t\t     "); printf("\xba\n");
-				printf("\xba"); printf("\t\t     "); printf("\xba\n");
-				printf("\xba"); printf("\t\t     "); printf("\xba\n");
-				printf("\xc8\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xBC\n");
+				SetColor(15, 0);
+	printf("\xc9\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xBB\n");
+	printf("\xba"); printf("\t\t     "); printf("\xba\n");
+	printf("\xba"); printf("\t\t     "); printf("\xba\n");
+	printf("\xba"); printf("\t\t     "); printf("\xba\n");
+	printf("\xba"); printf("\t\t     "); printf("\xba\n");
+	printf("\xba"); printf("\t\t     "); printf("\xba\n");
+	printf("\xba"); printf("\t\t     "); printf("\xba\n");
+	printf("\xba"); printf("\t\t     "); printf("\xba\n");
+	printf("\xba"); printf("\t\t     "); printf("\xba\n");
+	printf("\xba"); printf("\t\t     "); printf("\xba\n");
+	printf("\xba"); printf("\t\t     "); printf("\xba\n");
+	printf("\xba"); printf("\t\t     "); printf("\xba\n");
+	printf("\xba"); printf("\t\t     "); printf("\xba\n");
+	printf("\xba"); printf("\t\t     "); printf("\xba\n");
+	printf("\xba"); printf("\t\t     "); printf("\xba\n");
+	printf("\xba"); printf("\t\t     "); printf("\xba\n");
+	printf("\xba"); printf("\t\t     "); printf("\xba\n");
+	printf("\xba"); printf("\t\t     "); printf("\xba\n");
+	printf("\xba"); printf("\t\t     "); printf("\xba\n");
+	printf("\xba"); printf("\t\t     "); printf("\xba\n");
+	printf("\xba"); printf("\t\t     "); printf("\xba\n");
+	printf("\xc8\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xBC\n");
 
 
-				GotoXY(40, 0); printf("\xc9\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xBB\n");
-				GotoXY(40, 1); printf("\xba"); printf("\t\t     "); printf("\xba\n");
-				GotoXY(40, 2); printf("\xba"); printf("\t\t     "); printf("\xba\n");
-				GotoXY(40, 3); printf("\xba"); printf("\t\t     "); printf("\xba\n");
-				GotoXY(40, 4); printf("\xba"); printf("\t\t     "); printf("\xba\n");
-				GotoXY(40, 5); printf("\xba"); printf("\t\t     "); printf("\xba\n");
-				GotoXY(40, 6); printf("\xba"); printf("\t\t     "); printf("\xba\n");
-				GotoXY(40, 7); printf("\xba"); printf("\t\t     "); printf("\xba\n");
-				GotoXY(40, 8); printf("\xba"); printf("\t\t     "); printf("\xba\n");
-				GotoXY(40, 9); printf("\xba"); printf("\t\t     "); printf("\xba\n");
-				GotoXY(40, 10); printf("\xba"); printf("\t\t     "); printf("\xba\n");
-				GotoXY(40, 11); printf("\xba"); printf("\t\t     "); printf("\xba\n");
-				GotoXY(40, 12); printf("\xba"); printf("\t\t     "); printf("\xba\n");
-				GotoXY(40, 13); printf("\xba"); printf("\t\t     "); printf("\xba\n");
-				GotoXY(40, 14); printf("\xba"); printf("\t\t     "); printf("\xba\n");
-				GotoXY(40, 15); printf("\xba"); printf("\t\t     "); printf("\xba\n");
-				GotoXY(40, 16); printf("\xba"); printf("\t\t     "); printf("\xba\n");
-				GotoXY(40, 17); printf("\xba"); printf("\t\t     "); printf("\xba\n");
-				GotoXY(40, 18); printf("\xba"); printf("\t\t     "); printf("\xba\n");
-				GotoXY(40, 19); printf("\xba"); printf("\t\t     "); printf("\xba\n");
-				GotoXY(40, 20); printf("\xba"); printf("\t\t     "); printf("\xba\n");
-				GotoXY(40, 21); printf("\xc8\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xBC\n");
+	GotoXY(40, 0); printf("\xc9\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xBB\n");
+	GotoXY(40, 1); printf("\xba"); printf("\t\t     "); printf("\xba\n");
+	GotoXY(40, 2); printf("\xba"); printf("\t\t     "); printf("\xba\n");
+	GotoXY(40, 3); printf("\xba"); printf("\t\t     "); printf("\xba\n");
+	GotoXY(40, 4); printf("\xba"); printf("\t\t     "); printf("\xba\n");
+	GotoXY(40, 5); printf("\xba"); printf("\t\t     "); printf("\xba\n");
+	GotoXY(40, 6); printf("\xba"); printf("\t\t     "); printf("\xba\n");
+	GotoXY(40, 7); printf("\xba"); printf("\t\t     "); printf("\xba\n");
+	GotoXY(40, 8); printf("\xba"); printf("\t\t     "); printf("\xba\n");
+	GotoXY(40, 9); printf("\xba"); printf("\t\t     "); printf("\xba\n");
+	GotoXY(40, 10); printf("\xba"); printf("\t\t     "); printf("\xba\n");
+	GotoXY(40, 11); printf("\xba"); printf("\t\t     "); printf("\xba\n");
+	GotoXY(40, 12); printf("\xba"); printf("\t\t     "); printf("\xba\n");
+	GotoXY(40, 13); printf("\xba"); printf("\t\t     "); printf("\xba\n");
+	GotoXY(40, 14); printf("\xba"); printf("\t\t     "); printf("\xba\n");
+	GotoXY(40, 15); printf("\xba"); printf("\t\t     "); printf("\xba\n");
+	GotoXY(40, 16); printf("\xba"); printf("\t\t     "); printf("\xba\n");
+	GotoXY(40, 17); printf("\xba"); printf("\t\t     "); printf("\xba\n");
+	GotoXY(40, 18); printf("\xba"); printf("\t\t     "); printf("\xba\n");
+	GotoXY(40, 19); printf("\xba"); printf("\t\t     "); printf("\xba\n");
+	GotoXY(40, 20); printf("\xba"); printf("\t\t     "); printf("\xba\n");
+	GotoXY(40, 21); printf("\xc8\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xBC\n");
 
 				for (i = 0, x = 1; i<10, x<21; i++, x = x + 2)
 					for (j = 0, y = 1; j<10, y<21; j++, y = y + 2)
 
 					{
-						GotoXY(x, y);  if ((j + i) % 2 != 0) { SetColor(0, 1); printf("  "); }
-						else { SetColor(0, 9); printf("  "); }
-						GotoXY(x, y + 1); if ((j + i) % 2 != 0) { SetColor(0, 1); printf("  "); }
-						else { SetColor(0, 9); printf("  "); }
+						GotoXY(x, y);
+						if ((j + i) % 2 != 0) 
+						{ 
+						   SetColor(0, 1);
+						   printf("  ");
+						}
+						else 
+						{ 
+							SetColor(0, 9);
+							printf("  "); }
+						    GotoXY(x, y + 1);
+							if ((j + i) % 2 != 0) 
+							{ 
+								SetColor(0, 1);
+							    printf("  ");
+							}
+						else 
+						{ 
+							SetColor(0, 9);
+							printf("  ");
+						}
 					}
 
 				for (i = 0, x = 41; i<10, x<61; i++, x = x + 2)
 					for (j = 0, y = 1; j<10, y<21; j++, y = y + 2)
 
 					{
-						GotoXY(x, y); if (mypole[i][j] == 1) { SetColor(0, 12); printf("  "); }
-						else { if ((j + i) % 2 != 0) { SetColor(0, 1); printf("  "); } else { SetColor(0, 9); printf("  "); } }
-						GotoXY(x, y + 1); if (mypole[i][j] == 1) { SetColor(0, 12); printf("  "); }
-						else { if ((j + i) % 2 != 0) { SetColor(0, 1); printf("  "); } else { SetColor(0, 9); printf("  "); } }
+						GotoXY(x, y);
+						if (mypole[i][j] == 1) 
+						{ 
+							SetColor(0, 12);
+							printf("  ");
+						}
+						else 
+						{ 
+							if ((j + i) % 2 != 0) 
+							{ 
+								SetColor(0, 1); 
+								printf("  "); 
+							} 
+							else 
+							{ 
+								SetColor(0, 9);
+								printf("  "); 
+							} 
+						}
+						GotoXY(x, y + 1);
+						if (mypole[i][j] == 1) 
+						{
+							SetColor(0, 12);
+							printf("  ");
+						}
+						else 
+						{ 
+							if ((j + i) % 2 != 0) 
+							{ 
+								SetColor(0, 1);
+								printf("  ");
+							}
+							else
+							{ 
+								SetColor(0, 9);
+								printf("  ");
+							} 
+						}
 					}
 
-				GotoXY(25, 8); SetColor(15, 0); printf(Rus("принять-enter"));
-				GotoXY(22, 9); SetColor(15, 0); printf(Rus("управление-стрелки"));
+				GotoXY(22, 8); SetColor(15, 0); printf(Rus("потверждение-enter"));
+				GotoXY(23, 9); SetColor(15, 0); printf(Rus("наведение-стрелки"));
 				GotoXY(26, 10); SetColor(15, 0); printf(Rus("Выход-Esc"));
-				GotoXY(24, 12); SetColor(15, 0); printf(Rus("окно сообщений"));
+				GotoXY(22, 12); SetColor(15, 0); printf(Rus("датчик трансляции"));
 				GotoXY(23, 13); printf("\xc9\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xBB\n");
 				GotoXY(23, 14); printf("\xba"); printf("\t      "); printf("\xba\n");
 				GotoXY(23, 15); printf("\xba"); printf("\t      "); printf("\xba\n");
@@ -2351,7 +2432,10 @@ int main()
 
 				while (chislocomp<20 && chislomy<20)
 				{
-					if (chislomy == -1) { break; }
+					if (chislomy == -1) 
+					{ 
+						break;
+					}
 					if (chislocomp != 20 && chislomy != 20)
 					{
 						if (f == 1)
@@ -2371,12 +2455,12 @@ int main()
 				if (chislocomp == 20)
 				{
 					GotoXY(33, 14); SetColor(0, 12);
-					printf(Rus("Победа")); fflush(stdin); _getch(); fflush(stdin);
+					printf(Rus("Разгром!")); fflush(stdin); _getch(); fflush(stdin);
 				}
 				if (chislomy == 20)
 				{
 					GotoXY(33, 14); SetColor(0, 12);
-					printf(Rus("Разгром!")); fflush(stdin); _getch(); fflush(stdin);
+					printf(Rus("Победа!")); fflush(stdin); _getch(); fflush(stdin);
 				}
 
 			}
